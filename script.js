@@ -18,5 +18,11 @@ function openEnvelope(event) {
 }
 
 envelope.addEventListener("click", openEnvelope);
+envelope.addEventListener("touchstart", openEnvelope, {
+    passive: false
+});
 
 seal.addEventListener("click", openEnvelope);
+seal.addEventListener("touchstart", openEnvelope, {
+    passive: false
+});
