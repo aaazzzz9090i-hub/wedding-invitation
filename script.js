@@ -1,34 +1,56 @@
+```javascript
 const opening = document.getElementById("opening");
 const envelope = document.getElementById("envelope");
 const seal = document.getElementById("seal");
 
-let isOpened = false;
+let opened = false;
 
-function openInvitation() {
+function openEnvelope(event) {
 
-    if (isOpened) return;
+    if (opened) {
+        return;
+    }
 
-    isOpened = true;
+    opened = true;
 
-    // Start the cinematic 3D sequence
-    opening.classList.add("cinematic");
+    if (event) {
+        event.stopPropagation();
+    }
 
-    // After the complete envelope animation,
-    // reveal the final invitation
+    /*
+        Start the complete cinematic sequence:
+
+        1. Camera moves closer
+        2. Envelope tilts
+        3. Gold seal breaks away
+        4. Flap opens 180 degrees
+        5. Envelope folds move
+        6. Letter rises OUT of the envelope
+        7. Letter comes toward the camera
+        8. Final invitation appears
+    */
+
+    opening.classList.add("opening-animation");
+
+    /*
+        Wait until the envelope has completely opened
+        and the letter has come toward the camera.
+    */
+
     setTimeout(() => {
+
         document.body.classList.add("revealed");
-    }, 4200);
+
+    }, 7000);
 }
 
 
-// Click anywhere on the envelope
-envelope.addEventListener("click", openInvitation);
+/* Click the gold seal */
+
+seal.addEventListener("click", openEnvelope);
 
 
-// Click directly on the seal
-seal.addEventListener("click", function (event) {
+/* Also allow clicking the envelope */
 
-    event.stopPropagation();
-
-    openInvitation();
-});
+envelope.addEventListener("click", openEnvelope);
+```
