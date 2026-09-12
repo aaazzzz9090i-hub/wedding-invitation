@@ -47,6 +47,10 @@ body {
             #fffefa 45%,
             #f8f5ed 100%
         );
+
+    transition:
+        opacity 1.5s cubic-bezier(.77, 0, .18, 1),
+        visibility 1.5s;
 }
 
 .opening-title {
@@ -243,6 +247,7 @@ body {
 .right-fold,
 .bottom-fold {
     position: absolute;
+
     inset: 0;
 
     transform-style: preserve-3d;
@@ -388,6 +393,7 @@ body {
     z-index: 20;
 
     border-radius: 50%;
+
     border: 0;
 
     cursor: pointer;
@@ -451,17 +457,19 @@ body {
 
 
 /* =========================================
-   TEXT
+   OPEN TEXT
 ========================================= */
 
 .open-text {
     position: absolute;
+
     bottom: 12vh;
 
     font-size: 10px;
     letter-spacing: 5px;
 
     color: var(--gold-dark);
+
     opacity: .75;
 
     animation:
@@ -470,18 +478,22 @@ body {
 
 .hint {
     position: absolute;
+
     bottom: 8vh;
 
     font-family: "Cormorant Garamond", serif;
+
     font-size: 15px;
 
     letter-spacing: 1px;
 
     color: #a68a57;
+
     opacity: .55;
 }
 
 @keyframes breathe {
+
     0%, 100% {
         opacity: .35;
         transform: translateY(0);
@@ -495,18 +507,69 @@ body {
 
 
 /* =========================================
-   REAL ENVELOPE OPENING
+   CINEMATIC OPENING
 ========================================= */
 
-.envelope.open {
+.opening.cinematic .camera {
     animation:
-        envelopeOpen
-        1.8s
-        cubic-bezier(.2,.8,.2,1)
+        cameraMove
+        4.2s
+        cubic-bezier(.16, 1, .3, 1)
         forwards;
 }
 
-@keyframes envelopeOpen {
+.opening.cinematic .envelope {
+    animation:
+        envelopeCinematic
+        4.2s
+        cubic-bezier(.16, 1, .3, 1)
+        forwards;
+}
+
+
+/* =========================================
+   CAMERA MOVEMENT
+========================================= */
+
+@keyframes cameraMove {
+
+    0% {
+        transform:
+            translateZ(0)
+            scale(1);
+    }
+
+    25% {
+        transform:
+            translateZ(120px)
+            scale(1.05);
+    }
+
+    50% {
+        transform:
+            translateZ(300px)
+            scale(1.12);
+    }
+
+    75% {
+        transform:
+            translateZ(480px)
+            scale(1.22);
+    }
+
+    100% {
+        transform:
+            translateZ(650px)
+            scale(1.35);
+    }
+}
+
+
+/* =========================================
+   ENVELOPE MOVEMENT
+========================================= */
+
+@keyframes envelopeCinematic {
 
     0% {
         transform:
@@ -515,88 +578,96 @@ body {
             translateZ(0);
     }
 
-    30% {
+    18% {
         transform:
-            rotateX(3deg)
-            rotateY(4deg)
-            translateZ(50px);
+            rotateX(4deg)
+            rotateY(5deg)
+            translateZ(40px);
     }
 
-    60% {
+    35% {
         transform:
-            rotateX(-2deg)
-            rotateY(-2deg)
-            translateZ(100px);
+            rotateX(-4deg)
+            rotateY(-4deg)
+            translateZ(90px);
+    }
+
+    55% {
+        transform:
+            rotateX(0deg)
+            rotateY(0deg)
+            translateZ(160px)
+            scale(1.04);
     }
 
     100% {
         transform:
             rotateX(0deg)
             rotateY(0deg)
-            translateZ(80px);
+            translateZ(230px)
+            scale(1.1);
     }
 }
 
 
 /* =========================================
-   SEAL OPENS
+   SEAL RELEASE
 ========================================= */
 
-.envelope.open .seal {
+.opening.cinematic .seal {
     animation:
-        sealOpen
-        .8s
-        ease
+        sealRelease
+        1s
+        .35s
+        cubic-bezier(.16, 1, .3, 1)
         forwards;
 }
 
-@keyframes sealOpen {
+@keyframes sealRelease {
 
     0% {
+        opacity: 1;
+
         transform:
             translate(-50%, -50%)
             translateZ(120px)
             scale(1);
-
-        opacity: 1;
     }
 
-    50% {
+    45% {
         transform:
             translate(-50%, -50%)
-            translateZ(200px)
-            scale(1.15)
-            rotateZ(8deg);
-
-        opacity: 1;
+            translateZ(220px)
+            scale(1.25)
+            rotateZ(4deg);
     }
 
     100% {
+        opacity: 0;
+
         transform:
             translate(-50%, -50%)
-            translateZ(260px)
-            scale(.7)
-            rotateZ(15deg);
-
-        opacity: 0;
+            translateZ(350px)
+            scale(1.5)
+            rotateZ(-8deg);
     }
 }
 
 
 /* =========================================
-   REAL FLAP OPENING
+   FLAP OPEN
 ========================================= */
 
-.envelope.open .flap {
+.opening.cinematic .flap {
     animation:
-        openFlap
+        flapCinematic
         1.5s
-        .45s
-        cubic-bezier(.2,.8,.2,1)
+        1s
+        cubic-bezier(.16, 1, .3, 1)
         forwards;
 }
 
-@keyframes openFlap {
+@keyframes flapCinematic {
 
     0% {
         transform:
@@ -604,22 +675,22 @@ body {
             rotateX(0deg);
     }
 
-    30% {
+    25% {
         transform:
-            translateZ(75px)
-            rotateX(-45deg);
+            translateZ(80px)
+            rotateX(-35deg);
     }
 
-    65% {
+    60% {
         transform:
-            translateZ(90px)
+            translateZ(100px)
             rotateX(-120deg);
     }
 
     100% {
         transform:
-            translateZ(100px)
-            rotateX(-175deg);
+            translateZ(105px)
+            rotateX(-178deg);
     }
 }
 
@@ -628,68 +699,66 @@ body {
    FOLDS MOVE
 ========================================= */
 
-.envelope.open .left-fold {
+.opening.cinematic .left-fold {
     animation:
-        openLeft
-        1.2s
-        .8s
+        leftFoldMove
+        1.4s
+        1.25s
         ease
         forwards;
 }
 
-.envelope.open .right-fold {
+.opening.cinematic .right-fold {
     animation:
-        openRight
-        1.2s
-        .8s
+        rightFoldMove
+        1.4s
+        1.25s
         ease
         forwards;
 }
 
-.envelope.open .bottom-fold {
+.opening.cinematic .bottom-fold {
     animation:
-        openBottom
-        1.2s
-        .8s
+        bottomFoldMove
+        1.4s
+        1.25s
         ease
         forwards;
 }
 
-@keyframes openLeft {
+@keyframes leftFoldMove {
 
     0% {
         transform:
             translateZ(20px)
-            translateX(0)
             rotateY(0deg);
     }
 
     100% {
         transform:
-            translateZ(35px)
-            translateX(-18px)
-            rotateY(-8deg);
+            translateZ(45px)
+            rotateY(-8deg)
+            translateX(-8px);
     }
 }
 
-@keyframes openRight {
+@keyframes rightFoldMove {
 
     0% {
         transform:
             translateZ(21px)
-            translateX(0)
             rotateY(0deg);
     }
 
     100% {
         transform:
-            translateZ(35px)
-            translateX(18px)
-            rotateY(8deg);
+            translateZ(45px)
+            rotateY(8deg)
+            translateX(8px);
     }
 }
 
-@keyframes openBottom {
+@keyframes bottomFoldMove {
 
     0% {
         transform:
@@ -699,26 +768,107 @@ body {
 
     100% {
         transform:
-            translateZ(40px)
+            translateZ(50px)
             rotateX(12deg);
     }
 }
 
 
 /* =========================================
-   LETTER STAYS INSIDE
+   LETTER RISE
 ========================================= */
 
-.envelope.open .inside-letter {
-    transform:
-        translateZ(25px)
-        translateY(13%);
+.opening.cinematic .inside-letter {
+    animation:
+        letterRise
+        2.4s
+        1.65s
+        cubic-bezier(.16, 1, .3, 1)
+        forwards;
+}
+
+@keyframes letterRise {
+
+    0% {
+        transform:
+            translateZ(25px)
+            translateY(13%)
+            rotateX(0deg)
+            scale(1);
+    }
+
+    25% {
+        transform:
+            translateZ(80px)
+            translateY(-5%)
+            rotateX(-4deg)
+            scale(1.02);
+    }
+
+    55% {
+        transform:
+            translateZ(180px)
+            translateY(-35%)
+            rotateX(0deg)
+            scale(1.1);
+    }
+
+    80% {
+        transform:
+            translateZ(350px)
+            translateY(-55%)
+            rotateX(0deg)
+            scale(1.3);
+    }
+
+    100% {
+        transform:
+            translateZ(500px)
+            translateY(-72%)
+            rotateX(0deg)
+            scale(1.5);
+    }
+}
+
+
+/* =========================================
+   TEXT DISAPPEARS
+========================================= */
+
+.opening.cinematic .opening-title,
+.opening.cinematic .open-text,
+.opening.cinematic .hint {
+
+    animation:
+        fadeAway
+        .7s
+        .4s
+        ease
+        forwards;
+}
+
+@keyframes fadeAway {
+
+    to {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+}
+
+
+/* =========================================
+   OPENING DISAPPEARS
+========================================= */
+
+body.revealed .opening {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
 }
 
 
 /* =========================================
    FINAL INVITATION
-   KEPT HIDDEN
 ========================================= */
 
 .invitation {
@@ -743,11 +893,27 @@ body {
 
     opacity: 0;
     visibility: hidden;
+
+    transform:
+        scale(1.08);
+
+    transition:
+        opacity 1.8s cubic-bezier(.16, 1, .3, 1),
+        transform 2s cubic-bezier(.16, 1, .3, 1),
+        visibility 1.8s;
+}
+
+body.revealed .invitation {
+    opacity: 1;
+    visibility: visible;
+
+    transform:
+        scale(1);
 }
 
 
 /* =========================================
-   INVITATION DESIGN
+   INVITATION BORDER
 ========================================= */
 
 .invitation-border {
@@ -774,7 +940,14 @@ body {
     inset: 10px;
 
     border: 1px solid rgba(184,149,82,.18);
+
+    pointer-events: none;
 }
+
+
+/* =========================================
+   CORNERS
+========================================= */
 
 .corner {
     position: absolute;
@@ -791,26 +964,35 @@ body {
 .top-left {
     top: -1px;
     left: -1px;
+
     border-width: 2px 0 0 2px;
 }
 
 .top-right {
     top: -1px;
     right: -1px;
+
     border-width: 2px 2px 0 0;
 }
 
 .bottom-left {
     bottom: -1px;
     left: -1px;
+
     border-width: 0 0 2px 2px;
 }
 
 .bottom-right {
     bottom: -1px;
     right: -1px;
+
     border-width: 0 2px 2px 0;
 }
+
+
+/* =========================================
+   CONTENT
+========================================= */
 
 .invitation-content {
     text-align: center;
@@ -818,10 +1000,27 @@ body {
     color: var(--gold-dark);
 
     width: 90%;
+
+    animation:
+        invitationContent 2s .4s both;
+}
+
+@keyframes invitationContent {
+
+    from {
+        opacity: 0;
+        transform: translateY(25px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 .small-heading {
     font-size: 10px;
+
     letter-spacing: 6px;
 
     color: #a48958;
@@ -833,11 +1032,13 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
+
     gap: 25px;
 
     font-family: "Great Vibes", cursive;
 
     font-size: clamp(70px, 9vw, 125px);
+
     line-height: .9;
 
     color: var(--gold);
@@ -867,6 +1068,7 @@ body {
 
 .ornament span {
     height: 1px;
+
     flex: 1;
 
     background:
@@ -888,7 +1090,9 @@ body {
 
 .ornament i {
     font-size: 13px;
+
     font-style: normal;
+
     color: var(--gold);
 }
 
@@ -903,12 +1107,15 @@ body {
 .detail {
     display: flex;
     flex-direction: column;
+
     gap: 9px;
 }
 
 .detail small {
     font-size: 9px;
+
     letter-spacing: 4px;
+
     color: #a28a5d;
 }
 
@@ -916,6 +1123,7 @@ body {
     font-family: "Cormorant Garamond", serif;
 
     font-size: 20px;
+
     font-weight: 500;
 
     letter-spacing: 2px;
@@ -936,6 +1144,7 @@ body {
     font-family: "Cormorant Garamond", serif;
 
     font-size: 23px;
+
     font-style: italic;
 
     letter-spacing: 1px;
@@ -1003,6 +1212,7 @@ body {
 
     .names {
         flex-direction: column;
+
         gap: 3px;
 
         font-size: 78px;
@@ -1010,11 +1220,13 @@ body {
 
     .ampersand {
         font-size: 32px;
+
         margin: 0;
     }
 
     .details {
         flex-direction: column;
+
         gap: 22px;
     }
 
@@ -1033,20 +1245,26 @@ body {
 
     .small-heading {
         letter-spacing: 4px;
+
         margin-bottom: 28px;
     }
 }
 
 
-/* Reduced motion */
+/* =========================================
+   REDUCED MOTION
+========================================= */
 
 @media (prefers-reduced-motion: reduce) {
 
     *,
     *::before,
     *::after {
+
         animation-duration: .01ms !important;
+
         animation-iteration-count: 1 !important;
+
         transition-duration: .01ms !important;
     }
 }
