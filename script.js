@@ -1,10 +1,10 @@
-
+const opening = document.getElementById("opening");
 const envelope = document.getElementById("envelope");
 const seal = document.getElementById("seal");
 
 let isOpened = false;
 
-function openEnvelope(event) {
+function openInvitation(event) {
 
     if (isOpened) return;
 
@@ -15,10 +15,15 @@ function openEnvelope(event) {
         event.stopPropagation();
     }
 
-    envelope.classList.add("open");
+    // Start the full cinematic animation
+    opening.classList.add("cinematic");
+
+    // Reveal the invitation after the envelope sequence
+    setTimeout(() => {
+        document.body.classList.add("revealed");
+    }, 4200);
 }
 
-envelope.addEventListener("click", openEnvelope);
+envelope.addEventListener("click", openInvitation);
 
-seal.addEventListener("click", openEnvelope);
-
+seal.addEventListener("click", openInvitation);
