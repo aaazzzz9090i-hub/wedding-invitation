@@ -1,4 +1,7 @@
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Great+Vibes&family=Montserrat:wght@300;400;500&display=swap');
+
+/* =========================================================
+   RESET
+========================================================= */
 
 * {
     margin: 0;
@@ -6,152 +9,226 @@
     box-sizing: border-box;
 }
 
-html,
+html {
+    width: 100%;
+    height: 100%;
+}
+
 body {
     width: 100%;
     min-height: 100%;
-}
+    margin: 0;
 
-body {
-    background: #fff;
-    color: #29251f;
-    font-family: 'Montserrat', sans-serif;
     overflow: hidden;
+
+    background: #f7f4ee;
+
+    color: #40382f;
+
+    font-family: "Montserrat", sans-serif;
+
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
 }
 
 
-/* =========================
+/* =========================================================
    OPENING SCREEN
-========================= */
+========================================================= */
 
 .opening {
     position: fixed;
     inset: 0;
-    z-index: 100;
+
+    z-index: 1000;
+
+    width: 100%;
+    height: 100dvh;
+
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
 
     background:
-        radial-gradient(circle at center, #fff 0%, #faf8f3 65%, #f3eee5 100%);
+        radial-gradient(
+            circle at 50% 45%,
+            #ffffff 0%,
+            #fcfaf6 45%,
+            #f4eee4 100%
+        );
 
     opacity: 1;
     visibility: visible;
 
     transition:
-        opacity 1.2s ease,
-        visibility 1.2s ease;
+        opacity 1.15s ease,
+        visibility 1.15s ease;
+
+    overflow: hidden;
 }
 
 .opening.hide {
     opacity: 0;
     visibility: hidden;
+
     pointer-events: none;
 }
 
 
-/* =========================
-   TITLE
-========================= */
+/* =========================================================
+   OPENING TITLE
+========================================================= */
 
 .opening-title {
+    position: relative;
+
     margin-bottom: 42px;
+
     text-align: center;
+
+    transition:
+        opacity .7s ease,
+        transform .7s ease;
 }
 
 .opening-title span {
-    font-size: 11px;
+    display: block;
+
+    color: #80725e;
+
+    font-family: "Montserrat", sans-serif;
+
+    font-size: 10px;
     font-weight: 500;
+
     letter-spacing: 5px;
-    color: #7c705f;
+
+    white-space: nowrap;
 }
 
 
-/* =========================
+/* =========================================================
    CAMERA
-========================= */
+========================================================= */
 
 .camera {
-    width: min(650px, 78vw);
+    position: relative;
+
+    width: min(650px, 84vw);
+
     perspective: 1800px;
+
+    perspective-origin: 50% 50%;
 }
 
 
-/* =========================
+/* =========================================================
    ENVELOPE AREA
-========================= */
+========================================================= */
 
 .envelope-area {
+    position: relative;
+
     width: 100%;
+
     aspect-ratio: 1.65 / 1;
+
     cursor: pointer;
-    perspective: 1800px;
+
+    touch-action: manipulation;
+
+    -webkit-tap-highlight-color: transparent;
+
+    user-select: none;
+    -webkit-user-select: none;
+
+    /*
+       مهم:
+       الـenvelope-area نفسه هو اللي بياخد الـclick.
+       العناصر الداخلية مش هتمنع الضغط.
+    */
+    pointer-events: auto;
 }
 
 
-/* =========================
+/* =========================================================
    ENVELOPE
-========================= */
+========================================================= */
 
 .envelope {
-    position: relative;
+    position: absolute;
+
+    inset: 0;
+
     width: 100%;
     height: 100%;
 
     transform-style: preserve-3d;
 
     transform:
-        rotateX(7deg)
-        rotateY(-7deg);
+        rotateX(5deg)
+        rotateY(-5deg);
 
-    transition:
-        transform 1.8s cubic-bezier(.22, .61, .36, 1);
+    transform-origin: center center;
+
+    will-change: transform;
+
+    pointer-events: none;
 }
 
 
-/* =========================
+/* =========================================================
    LETTER
-========================= */
+========================================================= */
 
 .inside-letter {
     position: absolute;
 
-    width: 72%;
-    height: 86%;
-
     left: 14%;
-    top: 7%;
+    top: 8%;
 
-    z-index: 6;
+    width: 72%;
+    height: 84%;
 
-    background:
-        linear-gradient(
-            135deg,
-            #fffdf9 0%,
-            #f8f3e9 100%
-        );
-
-    border: 1px solid rgba(160, 140, 105, .25);
-
-    box-shadow:
-        0 12px 35px rgba(70, 55, 35, .14);
+    z-index: 2;
 
     display: flex;
     align-items: center;
     justify-content: center;
 
-    pointer-events: none;
+    background:
+        linear-gradient(
+            135deg,
+            #fffefa 0%,
+            #faf5eb 50%,
+            #f3ecdf 100%
+        );
+
+    border: 1px solid rgba(145, 122, 88, .24);
+
+    box-shadow:
+        0 12px 28px rgba(66, 51, 32, .12);
 
     transform:
-        translateZ(28px)
-        translateY(13%);
+        translate3d(0, 13%, 24px);
 
-    transition: none;
+    transform-origin: center center;
+
+    will-change: transform;
+
+    pointer-events: none;
+
+    /*
+       الورقة نفسها لا تعمل scale.
+       حجمها ثابت أثناء خروجها.
+    */
 }
 
 
-/* Letter text */
+/* =========================================================
+   LETTER CONTENT
+========================================================= */
 
 .mini-letter {
     display: flex;
@@ -159,176 +236,238 @@ body {
     align-items: center;
     justify-content: center;
 
-    color: #554b3e;
-
-    font-family: 'Cormorant Garamond', serif;
     text-align: center;
+
+    color: #51483d;
+
+    font-family: "Cormorant Garamond", serif;
+
+    pointer-events: none;
 }
 
 .mini-letter span {
+    display: block;
+
     font-size: clamp(28px, 4vw, 42px);
-    line-height: 1.1;
+
+    font-weight: 500;
+
+    line-height: 1;
 }
 
 .mini-letter small {
-    margin: 6px 0;
+    display: block;
 
-    font-family: 'Great Vibes', cursive;
-    font-size: clamp(25px, 3vw, 34px);
+    margin: 7px 0 5px;
 
-    color: #9b8666;
+    color: #a18a67;
+
+    font-family: "Great Vibes", cursive;
+
+    font-size: clamp(24px, 3vw, 31px);
+
+    font-weight: 400;
+
+    line-height: 1;
 }
 
 
-/* =========================
+/* =========================================================
    ENVELOPE BODY
-========================= */
+========================================================= */
 
 .envelope-body {
     position: absolute;
+
     inset: 0;
 
-    z-index: 4;
+    z-index: 5;
 
     overflow: hidden;
 
     background:
         linear-gradient(
             145deg,
-            #f8f3e9,
-            #eee6d8
+            #f9f2e7 0%,
+            #f1e7d7 48%,
+            #e5d8c4 100%
         );
 
-    border: 1px solid rgba(135, 115, 80, .35);
+    border: 1px solid rgba(132, 109, 75, .35);
 
     box-shadow:
-        0 22px 45px rgba(50, 40, 25, .18);
+        0 25px 50px rgba(58, 43, 25, .18);
 
     transform: translateZ(10px);
+
+    pointer-events: none;
 }
 
 
-/* =========================
-   PAPER INSIDE ENVELOPE
-========================= */
+/* =========================================================
+   INNER PAPER
+========================================================= */
 
 .envelope-paper {
     position: absolute;
+
     inset: 0;
+
+    z-index: 1;
 
     background:
         linear-gradient(
             145deg,
-            rgba(255,255,255,.3),
-            rgba(215,201,178,.15)
+            rgba(255,255,255,.32),
+            rgba(211,196,171,.12)
         );
 
-    z-index: 1;
+    pointer-events: none;
 }
 
 
-/* =========================
-   FOLDS
-========================= */
+/* =========================================================
+   LEFT FOLD
+========================================================= */
 
 .left-fold {
     position: absolute;
+
     left: 0;
     bottom: 0;
 
-    width: 52%;
+    width: 53%;
     height: 100%;
+
+    z-index: 5;
 
     background:
         linear-gradient(
             135deg,
-            #eee5d6,
-            #e4d9c7
+            #f0e7d9,
+            #e2d6c3
         );
 
-    clip-path: polygon(0 0, 100% 50%, 0 100%);
+    clip-path:
+        polygon(
+            0 0,
+            100% 50%,
+            0 100%
+        );
 
-    z-index: 5;
+    transform:
+        translate3d(0, 0, 0);
 
     transform-origin: left center;
+
+    pointer-events: none;
 }
+
+
+/* =========================================================
+   RIGHT FOLD
+========================================================= */
 
 .right-fold {
     position: absolute;
+
     right: 0;
     bottom: 0;
 
-    width: 52%;
+    width: 53%;
     height: 100%;
+
+    z-index: 5;
 
     background:
         linear-gradient(
             225deg,
-            #eee5d6,
-            #e4d9c7
+            #f0e7d9,
+            #e2d6c3
         );
 
-    clip-path: polygon(100% 0, 0 50%, 100% 100%);
+    clip-path:
+        polygon(
+            100% 0,
+            0 50%,
+            100% 100%
+        );
 
-    z-index: 5;
+    transform:
+        translate3d(0, 0, 0);
 
     transform-origin: right center;
+
+    pointer-events: none;
 }
 
 
+/* =========================================================
+   BOTTOM FOLD
+========================================================= */
+
 .bottom-fold {
     position: absolute;
+
     left: 0;
     bottom: 0;
 
     width: 100%;
     height: 70%;
 
+    z-index: 6;
+
     background:
         linear-gradient(
             180deg,
             #f0e8da,
-            #e2d6c3
+            #dfd2bf
         );
 
-    clip-path: polygon(
-        0 100%,
-        50% 20%,
-        100% 100%
-    );
+    clip-path:
+        polygon(
+            0 100%,
+            50% 18%,
+            100% 100%
+        );
 
-    z-index: 6;
+    transform:
+        translate3d(0, 0, 0);
 
     transform-origin: center bottom;
+
+    pointer-events: none;
 }
 
 
-/* =========================
+/* =========================================================
    FLAP
-========================= */
+========================================================= */
 
 .flap {
     position: absolute;
+
     left: 0;
     top: 0;
 
     width: 100%;
-    height: 67%;
+    height: 68%;
 
     z-index: 10;
 
     background:
         linear-gradient(
             180deg,
-            #f8f1e5,
-            #e7dccb
+            #fbf4e8 0%,
+            #eee2d1 100%
         );
 
-    clip-path: polygon(
-        0 0,
-        100% 0,
-        50% 100%
-    );
+    clip-path:
+        polygon(
+            0 0,
+            100% 0,
+            50% 100%
+        );
 
     transform-origin: center top;
 
@@ -337,30 +476,45 @@ body {
         rotateX(0deg);
 
     backface-visibility: hidden;
+
+    -webkit-backface-visibility: hidden;
+
+    will-change: transform;
+
+    pointer-events: none;
 }
+
+
+/* =========================================================
+   FLAP INNER
+========================================================= */
 
 .flap-inner {
     position: absolute;
+
     inset: 1px;
 
     background:
         linear-gradient(
             180deg,
-            rgba(255,255,255,.25),
-            rgba(205,190,165,.15)
+            rgba(255,255,255,.28),
+            rgba(201,184,157,.12)
         );
 
-    clip-path: polygon(
-        0 0,
-        100% 0,
-        50% 100%
-    );
+    clip-path:
+        polygon(
+            0 0,
+            100% 0,
+            50% 100%
+        );
+
+    pointer-events: none;
 }
 
 
-/* =========================
+/* =========================================================
    SEAL
-========================= */
+========================================================= */
 
 .seal {
     position: absolute;
@@ -371,69 +525,88 @@ body {
     width: 104px;
     height: 104px;
 
-    transform:
-        translate(-50%, -50%)
-        translateZ(100px);
-
     z-index: 30;
-
-    border: none;
-    border-radius: 50%;
-
-    cursor: pointer;
-
-    background:
-        radial-gradient(
-            circle at 35% 30%,
-            #bca77f,
-            #92764c 65%,
-            #705638 100%
-        );
-
-    color: #fffaf0;
-
-    box-shadow:
-        0 8px 20px rgba(60, 45, 25, .28),
-        inset 0 1px 2px rgba(255,255,255,.35);
 
     display: flex;
     align-items: center;
     justify-content: center;
+
     gap: 5px;
 
-    font-family: 'Cormorant Garamond', serif;
+    border: 0;
+    border-radius: 50%;
 
-    transition:
-        transform .8s cubic-bezier(.22, .61, .36, 1),
-        opacity .5s ease;
+    outline: none;
+
+    background:
+        radial-gradient(
+            circle at 32% 28%,
+            #c5b187 0%,
+            #a4895e 45%,
+            #826541 78%,
+            #6d5233 100%
+        );
+
+    color: #fffaf1;
+
+    font-family: "Cormorant Garamond", serif;
+
+    box-shadow:
+        0 8px 22px rgba(58, 43, 25, .27),
+        inset 0 1px 3px rgba(255,255,255,.35);
+
+    transform:
+        translate(-50%, -50%)
+        translateZ(90px);
+
+    transform-origin: center center;
+
+    will-change: transform, opacity;
+
+    pointer-events: none;
 }
 
 .seal span {
     font-size: 25px;
+    line-height: 1;
 }
 
 .seal b {
-    font-family: 'Great Vibes', cursive;
+    color: #fffaf1;
+
+    font-family: "Great Vibes", cursive;
+
     font-size: 24px;
     font-weight: 400;
+
+    line-height: 1;
 }
 
 
-/* =========================
-   OPENING ANIMATION
-========================= */
+/* =========================================================
+   ENVELOPE OPEN - MAIN ROTATION
+========================================================= */
 
 .envelope.open {
     animation:
-        envelopeOpen 1.7s cubic-bezier(.22, .61, .36, 1) forwards;
+        envelopeSettle
+        1.45s
+        cubic-bezier(.22, .61, .36, 1)
+        forwards;
 }
 
-@keyframes envelopeOpen {
+@keyframes envelopeSettle {
 
     0% {
         transform:
-            rotateX(7deg)
-            rotateY(-7deg);
+            rotateX(5deg)
+            rotateY(-5deg);
+    }
+
+    45% {
+        transform:
+            rotateX(2deg)
+            rotateY(-2deg);
     }
 
     100% {
@@ -444,47 +617,80 @@ body {
 }
 
 
-/* Seal moves away smoothly */
+/* =========================================================
+   SEAL OPEN
+========================================================= */
 
 .envelope.open .seal {
     animation:
-        sealOpen .75s cubic-bezier(.22, .61, .36, 1) forwards;
+        sealLeave
+        .75s
+        cubic-bezier(.22, .61, .36, 1)
+        forwards;
 }
 
-@keyframes sealOpen {
+@keyframes sealLeave {
 
     0% {
         opacity: 1;
+
+        transform:
+            translate(-50%, -50%)
+            translateZ(90px)
+            translateY(0);
+    }
+
+    45% {
+        opacity: .7;
+
         transform:
             translate(-50%, -50%)
             translateZ(100px)
-            scale(1);
+            translateY(-4px);
     }
 
     100% {
         opacity: 0;
+
         transform:
             translate(-50%, -50%)
-            translateZ(125px)
-            translateY(18px)
-            scale(.94);
+            translateZ(105px)
+            translateY(14px);
     }
 }
 
 
-/* Flap opens */
+/* =========================================================
+   FLAP OPEN
+========================================================= */
 
 .envelope.open .flap {
     animation:
-        flapOpen 1.55s cubic-bezier(.22, .61, .36, 1) .15s forwards;
+        flapLeave
+        1.55s
+        cubic-bezier(.22, .61, .36, 1)
+        .15s
+        forwards;
 }
 
-@keyframes flapOpen {
+@keyframes flapLeave {
 
     0% {
         transform:
             translateZ(55px)
             rotateX(0deg);
+    }
+
+    35% {
+        transform:
+            translateZ(55px)
+            rotateX(-55deg);
+    }
+
+    70% {
+        transform:
+            translateZ(55px)
+            rotateX(-125deg);
     }
 
     100% {
@@ -495,213 +701,271 @@ body {
 }
 
 
-/* Side folds move slightly */
+/* =========================================================
+   SIDE FOLDS - VERY SMALL MOVEMENT
+========================================================= */
 
 .envelope.open .left-fold {
     animation:
-        leftFoldOpen 1.35s cubic-bezier(.22, .61, .36, 1) .35s forwards;
+        leftFoldMove
+        1.25s
+        cubic-bezier(.22, .61, .36, 1)
+        .35s
+        forwards;
 }
 
 .envelope.open .right-fold {
     animation:
-        rightFoldOpen 1.35s cubic-bezier(.22, .61, .36, 1) .35s forwards;
+        rightFoldMove
+        1.25s
+        cubic-bezier(.22, .61, .36, 1)
+        .35s
+        forwards;
 }
 
 .envelope.open .bottom-fold {
     animation:
-        bottomFoldOpen 1.35s cubic-bezier(.22, .61, .36, 1) .35s forwards;
+        bottomFoldMove
+        1.25s
+        cubic-bezier(.22, .61, .36, 1)
+        .35s
+        forwards;
 }
 
-@keyframes leftFoldOpen {
+@keyframes leftFoldMove {
 
     0% {
-        transform: translateX(0);
+        transform:
+            translate3d(0, 0, 0);
     }
 
     100% {
-        transform: translateX(-4%);
+        transform:
+            translate3d(-3%, 0, 0);
     }
 }
 
-@keyframes rightFoldOpen {
+@keyframes rightFoldMove {
 
     0% {
-        transform: translateX(0);
+        transform:
+            translate3d(0, 0, 0);
     }
 
     100% {
-        transform: translateX(4%);
+        transform:
+            translate3d(3%, 0, 0);
     }
 }
 
-@keyframes bottomFoldOpen {
+@keyframes bottomFoldMove {
 
     0% {
-        transform: translateY(0);
+        transform:
+            translate3d(0, 0, 0);
     }
 
     100% {
-        transform: translateY(7%);
+        transform:
+            translate3d(0, 5%, 0);
     }
 }
 
 
-/* =========================
+/* =========================================================
    LETTER COMES OUT
-========================= */
+========================================================= */
+
+/*
+   أهم جزء:
+
+   - لا يوجد scale
+   - حجم الورقة ثابت
+   - الحركة كلها translateY
+   - الحركة تبدأ بعد بداية فتح الفلاب
+   - الورقة تطلع بهدوء
+*/
 
 .envelope.open .inside-letter {
+    z-index: 15;
+
     animation:
-        letterRise 1.85s cubic-bezier(.22, .61, .36, 1) .55s forwards;
+        letterRise
+        2.05s
+        cubic-bezier(.22, .61, .36, 1)
+        .48s
+        forwards;
 }
 
 @keyframes letterRise {
 
     0% {
         transform:
-            translateZ(28px)
-            translateY(13%);
+            translate3d(0, 13%, 24px);
     }
 
-    25% {
+    15% {
         transform:
-            translateZ(30px)
-            translateY(8%);
+            translate3d(0, 10%, 25px);
+    }
+
+    30% {
+        transform:
+            translate3d(0, 6%, 26px);
     }
 
     50% {
         transform:
-            translateZ(35px)
-            translateY(-2%);
+            translate3d(0, 0%, 28px);
     }
 
-    75% {
+    70% {
         transform:
-            translateZ(45px)
-            translateY(-20%);
+            translate3d(0, -10%, 31px);
+    }
+
+    85% {
+        transform:
+            translate3d(0, -19%, 34px);
     }
 
     100% {
         transform:
-            translateZ(55px)
-            translateY(-34%);
+            translate3d(0, -27%, 38px);
     }
 }
 
 
-/* =========================
+/* =========================================================
    TEXT BELOW ENVELOPE
-========================= */
+========================================================= */
 
 .open-text {
-    margin-top: 45px;
+    margin-top: 44px;
 
-    font-size: 11px;
+    color: #756a59;
+
+    font-family: "Montserrat", sans-serif;
+
+    font-size: 10px;
     font-weight: 500;
 
     letter-spacing: 4px;
 
-    color: #716653;
+    text-align: center;
 
     transition:
-        opacity .6s ease,
-        transform .6s ease;
+        opacity .7s ease,
+        transform .7s ease;
 }
 
 .hint {
     margin-top: 12px;
 
-    font-family: 'Cormorant Garamond', serif;
+    color: #9a8d7a;
+
+    font-family: "Cormorant Garamond", serif;
 
     font-size: 16px;
 
     font-style: italic;
 
-    color: #9b907f;
+    text-align: center;
 
     transition:
-        opacity .6s ease;
+        opacity .7s ease,
+        transform .7s ease;
 }
 
+.opening.hide .opening-title,
 .opening.hide .open-text,
-.opening.hide .hint,
-.opening.hide .opening-title {
+.opening.hide .hint {
     opacity: 0;
-    transform: translateY(-10px);
+
+    transform:
+        translateY(-10px);
 }
 
 
-/* =========================
+/* =========================================================
    INVITATION
-========================= */
+========================================================= */
 
 .invitation {
     position: fixed;
+
     inset: 0;
 
     z-index: 10;
+
+    width: 100%;
+    height: 100dvh;
 
     display: flex;
     align-items: center;
     justify-content: center;
 
-    padding: 30px;
+    padding: 25px;
 
     background:
         radial-gradient(
             circle at center,
-            #fff 0%,
-            #faf8f3 70%,
-            #f1eadf 100%
+            #ffffff 0%,
+            #faf8f3 58%,
+            #eee7dc 100%
         );
 
     opacity: 0;
     visibility: hidden;
 
-    transform: scale(.98);
+    transform:
+        scale(.985);
 
     transition:
-        opacity 1.3s ease,
-        visibility 1.3s ease,
-        transform 1.3s ease;
+        opacity 1.25s ease,
+        visibility 1.25s ease,
+        transform 1.25s ease;
 }
 
 .invitation.show {
     opacity: 1;
     visibility: visible;
-    transform: scale(1);
+
+    transform:
+        scale(1);
 }
 
 
-/* =========================
+/* =========================================================
    INVITATION BORDER
-========================= */
+========================================================= */
 
 .invitation-border {
     position: relative;
 
     width: min(760px, 92vw);
+
     min-height: min(620px, 82vh);
 
-    border: 1px solid rgba(145, 123, 89, .45);
+    padding: 60px 40px;
 
     display: flex;
     align-items: center;
     justify-content: center;
 
-    padding: 60px 40px;
-
     background:
         rgba(255,255,255,.55);
 
+    border: 1px solid rgba(145,123,89,.45);
+
     box-shadow:
-        0 20px 60px rgba(65, 50, 30, .08);
+        0 20px 60px rgba(65,50,30,.08);
 }
 
 
-/* =========================
+/* =========================================================
    CORNERS
-========================= */
+========================================================= */
 
 .corner {
     position: absolute;
@@ -710,68 +974,98 @@ body {
     height: 42px;
 
     border-color: #a28b69;
+
     border-style: solid;
 }
 
 .top-left {
     top: 15px;
     left: 15px;
-    border-width: 1px 0 0 1px;
+
+    border-width:
+        1px
+        0
+        0
+        1px;
 }
 
 .top-right {
     top: 15px;
     right: 15px;
-    border-width: 1px 1px 0 0;
+
+    border-width:
+        1px
+        1px
+        0
+        0;
 }
 
 .bottom-left {
     bottom: 15px;
     left: 15px;
-    border-width: 0 0 1px 1px;
+
+    border-width:
+        0
+        0
+        1px
+        1px;
 }
 
 .bottom-right {
-    bottom: 15px;
     right: 15px;
-    border-width: 0 1px 1px 0;
+    bottom: 15px;
+
+    border-width:
+        0
+        1px
+        1px
+        0;
 }
 
 
-/* =========================
+/* =========================================================
    INVITATION CONTENT
-========================= */
+========================================================= */
 
 .invitation-content {
     width: 100%;
+
     text-align: center;
 }
 
 .small-heading {
-    font-size: 10px;
-    letter-spacing: 5px;
+    margin-bottom: 28px;
 
     color: #8d806d;
 
-    margin-bottom: 28px;
+    font-family: "Montserrat", sans-serif;
+
+    font-size: 10px;
+    font-weight: 500;
+
+    letter-spacing: 5px;
 }
 
 .names {
     display: flex;
     align-items: center;
     justify-content: center;
+
     gap: 25px;
 
-    font-family: 'Great Vibes', cursive;
+    color: #4f463a;
+
+    font-family: "Great Vibes", cursive;
 
     font-size: clamp(52px, 8vw, 82px);
 
-    color: #4f463a;
+    line-height: 1;
 }
 
 .ampersand {
-    font-size: .65em;
     color: #a48d6c;
+
+    font-size: .65em;
 }
 
 .ornament {
@@ -781,7 +1075,10 @@ body {
 
     gap: 14px;
 
-    margin: 25px auto 40px;
+    margin:
+        25px
+        auto
+        40px;
 }
 
 .ornament span {
@@ -792,9 +1089,11 @@ body {
 }
 
 .ornament i {
-    font-style: normal;
     color: #a48d6c;
+
     font-size: 13px;
+
+    font-style: normal;
 }
 
 .details {
@@ -810,39 +1109,46 @@ body {
 .detail {
     display: flex;
     flex-direction: column;
+
     gap: 8px;
 }
 
 .detail small {
-    font-size: 9px;
-    letter-spacing: 3px;
     color: #9a8c78;
+
+    font-size: 9px;
+
+    letter-spacing: 3px;
 }
 
 .detail strong {
-    font-family: 'Cormorant Garamond', serif;
+    color: #51483d;
+
+    font-family: "Cormorant Garamond", serif;
+
     font-size: 20px;
     font-weight: 500;
+
     letter-spacing: 1px;
-    color: #51483d;
 }
 
 .divider {
     width: 1px;
     height: 42px;
+
     background: #c7b9a2;
 }
 
 .quote {
-    font-family: 'Cormorant Garamond', serif;
+    margin-bottom: 35px;
+
+    color: #807362;
+
+    font-family: "Cormorant Garamond", serif;
 
     font-size: 20px;
 
     font-style: italic;
-
-    color: #807362;
-
-    margin-bottom: 35px;
 }
 
 .closing {
@@ -861,19 +1167,19 @@ body {
 }
 
 .closing b {
-    font-family: 'Great Vibes', cursive;
+    color: #75634d;
+
+    font-family: "Great Vibes", cursive;
 
     font-size: 28px;
 
     font-weight: 400;
-
-    color: #75634d;
 }
 
 
-/* =========================
+/* =========================================================
    MOBILE
-========================= */
+========================================================= */
 
 @media (max-width: 700px) {
 
@@ -883,6 +1189,7 @@ body {
 
     .opening-title span {
         font-size: 8px;
+
         letter-spacing: 3px;
     }
 
@@ -905,7 +1212,9 @@ body {
 
     .open-text {
         margin-top: 32px;
+
         font-size: 9px;
+
         letter-spacing: 3px;
     }
 
@@ -927,12 +1236,17 @@ body {
 
     .invitation-border {
         min-height: 80vh;
-        padding: 45px 20px;
+
+        padding:
+            45px
+            20px;
     }
 
     .names {
         flex-direction: column;
+
         gap: 0;
+
         line-height: 1;
     }
 
@@ -942,6 +1256,7 @@ body {
 
     .details {
         flex-direction: column;
+
         gap: 20px;
     }
 
@@ -958,9 +1273,81 @@ body {
         font-size: 18px;
     }
 }
-.envelope-area,
-.envelope,
-.seal {
-    cursor: pointer;
-    pointer-events: auto;
+
+
+/* =========================================================
+   SMALL PHONES
+========================================================= */
+
+@media (max-width: 420px) {
+
+    .opening-title span {
+        font-size: 7px;
+        letter-spacing: 2.5px;
+    }
+
+    .camera {
+        width: 90vw;
+    }
+
+    .seal {
+        width: 76px;
+        height: 76px;
+    }
+
+    .seal span {
+        font-size: 18px;
+    }
+
+    .seal b {
+        font-size: 18px;
+    }
+
+    .mini-letter span {
+        font-size: 22px;
+    }
+
+    .mini-letter small {
+        font-size: 20px;
+    }
+
+    .invitation-border {
+        min-height: 84vh;
+
+        padding:
+            40px
+            15px;
+    }
+
+    .corner {
+        width: 32px;
+        height: 32px;
+    }
+
+    .small-heading {
+        font-size: 8px;
+        letter-spacing: 3px;
+    }
+
+    .detail strong {
+        font-size: 16px;
+    }
 }
+
+
+/* =========================================================
+   REDUCED MOTION
+========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+        animation-duration: .01ms !important;
+        animation-iteration-count: 1 !important;
+
+        transition-duration: .01ms !important;
+    }
+}
+
