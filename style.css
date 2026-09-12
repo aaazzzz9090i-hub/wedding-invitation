@@ -1,644 +1,572 @@
 * {
+    margin: 0;
+    padding: 0;
     box-sizing: border-box;
-    -webkit-tap-highlight-color: transparent;
+}
+
+:root {
+    --gold: #b89552;
+    --gold-light: #d8bd7b;
+    --gold-dark: #8d6d32;
+    --cream: #fffdf8;
+    --paper: #fffefa;
 }
 
 html,
 body {
-    margin: 0;
     width: 100%;
-    height: 100%;
+    min-height: 100%;
 }
 
 body {
-    overflow: hidden;
-    background: #f5f0e7;
-    color: #2c261f;
-    font-family: "Cormorant Garamond", serif;
+    background: #ffffff;
+    color: #9b7a3e;
+    font-family: "Montserrat", sans-serif;
+    overflow-x: hidden;
 }
 
 
-/* =================================
+/* =========================================
    OPENING
-================================= */
+========================================= */
 
 .opening {
     position: fixed;
     inset: 0;
-
-    z-index: 100;
+    z-index: 20;
 
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-direction: column;
 
     background:
         radial-gradient(
             circle at center,
-            #fffefa 0%,
-            #f7f2e9 55%,
-            #e8dfd0 100%
+            #ffffff 0%,
+            #fffefa 45%,
+            #f8f5ed 100%
         );
+}
 
-    perspective: 1200px;
+.opening-title {
+    position: absolute;
+    top: 8vh;
 
-    transition:
-        opacity 1.4s ease,
-        visibility 1.4s ease;
+    font-size: 11px;
+    letter-spacing: 6px;
+    font-weight: 400;
+
+    color: var(--gold-dark);
+    opacity: .85;
+}
+
+.opening-title::after {
+    content: "";
+    display: block;
+
+    width: 42px;
+    height: 1px;
+
+    background: var(--gold);
+
+    margin: 16px auto 0;
 }
 
 
-/* =================================
+/* =========================================
    CAMERA
-================================= */
+========================================= */
 
 .camera {
-    position: relative;
-
     width: 100%;
-    height: 100%;
+    height: 550px;
 
     display: flex;
     align-items: center;
     justify-content: center;
 
-    perspective: 1200px;
+    perspective: 1800px;
+    perspective-origin: 50% 45%;
 
     transform-style: preserve-3d;
 }
 
 
-/* =================================
-   ENVELOPE SCENE
-================================= */
+/* =========================================
+   ENVELOPE
+========================================= */
 
-.envelope-scene {
+.envelope-area {
+    width: 650px;
+    max-width: 78vw;
+
+    aspect-ratio: 1.65 / 1;
+
     position: relative;
 
-    width: min(90vw, 620px);
-    height: min(60vw, 410px);
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    perspective: 1200px;
-
     transform-style: preserve-3d;
 }
-
-
-/* =================================
-   ENVELOPE
-================================= */
 
 .envelope {
-    position: relative;
-
-    width: min(86vw, 570px);
-    height: min(54vw, 360px);
+    position: absolute;
+    inset: 0;
 
     transform-style: preserve-3d;
 
-    cursor: pointer;
+    transform:
+        rotateX(7deg)
+        rotateY(-7deg)
+        translateZ(0);
 
     filter:
-        drop-shadow(
-            0 25px 30px rgba(55, 43, 28, .22)
-        );
-
-    transition:
-        transform .3s ease;
+        drop-shadow(0 35px 30px rgba(79, 57, 20, .15));
 }
 
 
-/* =================================
-   BACK
-================================= */
+/* =========================================
+   LETTER INSIDE
+========================================= */
 
-.envelope-back {
+.inside-letter {
     position: absolute;
 
-    inset: 0;
+    width: 86%;
+    height: 94%;
+
+    left: 7%;
+    top: 2%;
 
     z-index: 1;
 
     background:
         linear-gradient(
-            145deg,
-            #fffdf8,
-            #e3dacc
+            135deg,
+            #ffffff,
+            #fbf8f0
         );
 
-    border: 1px solid rgba(120, 90, 40, .18);
+    border: 1px solid rgba(184, 149, 82, .25);
 
-    border-radius: 2px;
+    transform:
+        translateZ(25px)
+        translateY(13%);
 
-    transform: translateZ(0);
-
-}
-
-
-/* =================================
-   LETTER
-================================= */
-
-.letter {
-    position: absolute;
-
-    left: 8%;
-    top: 7%;
-
-    width: 84%;
-    height: 90%;
-
-    z-index: 3;
-
-    background: #fffdf9;
-
-    border: 1px solid rgba(160, 125, 65, .25);
+    transform-style: preserve-3d;
 
     box-shadow:
-        0 12px 30px rgba(40, 30, 20, .18);
+        0 15px 35px rgba(90, 65, 25, .12);
+}
+
+.mini-letter {
+    width: 100%;
+    height: 100%;
 
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-direction: column;
 
-    opacity: 0;
-
-    transform:
-        translateY(42%)
-        translateZ(10px)
-        scale(.82);
-
-    transform-origin: bottom center;
-
-    transition: none;
-}
-
-
-.letter-content {
-    width: 100%;
-
-    padding: 15px;
-
-    text-align: center;
-}
-
-
-.mini-title {
-    font-family: "Montserrat", sans-serif;
-
-    font-size: 8px;
-
-    letter-spacing: .25em;
-
-    color: #806b49;
-}
-
-
-.name {
-    margin: 12px 0 4px;
+    color: var(--gold-dark);
 
     font-family: "Great Vibes", cursive;
 
-    font-size: clamp(48px, 9vw, 72px);
+    font-size: 42px;
 
-    font-weight: 400;
+    transform: translateZ(5px);
+}
 
-    line-height: .8;
+.mini-letter small {
+    font-family: "Cormorant Garamond", serif;
+    font-size: 20px;
+    margin: -2px 0;
 }
 
 
-.ampersand {
-    color: #a27c39;
+/* =========================================
+   ENVELOPE BODY
+========================================= */
 
-    font-size: 23px;
-}
-
-
-.line {
-    width: 75px;
-    height: 1px;
-
-    margin: 17px auto;
-
-    background: #ae8b4a;
-}
-
-
-.date,
-.venue {
-    font-family: "Montserrat", sans-serif;
-
-    font-size: 9px;
-
-    letter-spacing: .13em;
-
-    color: #806b49;
-}
-
-
-.venue {
-    margin-top: 8px;
-}
-
-
-.quote {
-    margin-top: 18px;
-
-    font-size: 15px;
-
-    font-style: italic;
-}
-
-
-/* =================================
-   SIDE FOLDS
-================================= */
-
-.fold {
+.envelope-body {
     position: absolute;
+    inset: 0;
 
-    z-index: 6;
-
-    width: 0;
-    height: 0;
-
-    transform-style: preserve-3d;
-
-    transition: none;
-}
-
-
-/* LEFT */
-
-.fold.left {
-    left: 0;
-    bottom: 0;
-
-    border-top: 180px solid transparent;
-    border-bottom: 180px solid transparent;
-    border-left: 285px solid #ddd3c3;
-
-    transform-origin: left center;
-}
-
-
-/* RIGHT */
-
-.fold.right {
-    right: 0;
-    bottom: 0;
-
-    border-top: 180px solid transparent;
-    border-bottom: 180px solid transparent;
-    border-right: 285px solid #e8dfd1;
-
-    transform-origin: right center;
-}
-
-
-/* BOTTOM */
-
-.fold.bottom {
-    left: 0;
-    bottom: 0;
-
-    border-left: 285px solid transparent;
-    border-right: 285px solid transparent;
-    border-bottom: 195px solid #d3c8b7;
-
-    transform-origin: center bottom;
-}
-
-
-/* =================================
-   TOP FLAP
-================================= */
-
-.flap {
-    position: absolute;
-
-    left: 0;
-    top: 0;
-
-    width: 100%;
-    height: 55%;
-
-    z-index: 10;
+    z-index: 4;
 
     background:
         linear-gradient(
             145deg,
-            #fbf8f1,
-            #d9cfbf
+            #fffefb 0%,
+            #f7f2e7 50%,
+            #eee6d6 100%
         );
 
-    clip-path:
-        polygon(
-            0 0,
-            100% 0,
-            50% 100%
-        );
+    border: 1px solid rgba(155, 122, 62, .28);
 
-    transform-origin: 50% 0%;
-
-    transform:
-        rotateX(0deg);
+    overflow: hidden;
 
     transform-style: preserve-3d;
 
-    backface-visibility: visible;
+    transform:
+        translateZ(10px);
 
-    will-change: transform;
+    box-shadow:
+        inset 0 0 0 1px rgba(255,255,255,.8),
+        inset 0 -25px 45px rgba(100,70,20,.04);
+}
+
+.envelope-paper {
+    position: absolute;
+    inset: 0;
+
+    background:
+        radial-gradient(
+            circle at 20% 20%,
+            rgba(184,149,82,.05),
+            transparent 30%
+        ),
+        radial-gradient(
+            circle at 80% 70%,
+            rgba(184,149,82,.04),
+            transparent 30%
+        );
+
+    pointer-events: none;
 }
 
 
-/* =================================
-   SEAL
-================================= */
+/* =========================================
+   FOLDS
+========================================= */
+
+.left-fold,
+.right-fold,
+.bottom-fold {
+    position: absolute;
+    inset: 0;
+
+    transform-style: preserve-3d;
+
+    pointer-events: none;
+}
+
+.left-fold {
+    background:
+        linear-gradient(
+            135deg,
+            transparent 49.5%,
+            rgba(160,130,75,.18) 50%,
+            transparent 50.5%
+        );
+
+    clip-path: polygon(
+        0 0,
+        50% 50%,
+        0 100%
+    );
+
+    z-index: 3;
+
+    transform:
+        translateZ(20px);
+}
+
+.right-fold {
+    background:
+        linear-gradient(
+            225deg,
+            transparent 49.5%,
+            rgba(160,130,75,.18) 50%,
+            transparent 50.5%
+        );
+
+    clip-path: polygon(
+        100% 0,
+        50% 50%,
+        100% 100%
+    );
+
+    z-index: 3;
+
+    transform:
+        translateZ(21px);
+}
+
+.bottom-fold {
+    background:
+        linear-gradient(
+            180deg,
+            rgba(255,255,255,.1),
+            rgba(210,194,160,.35)
+        );
+
+    clip-path: polygon(
+        0 100%,
+        50% 50%,
+        100% 100%
+    );
+
+    z-index: 5;
+
+    transform:
+        translateZ(25px);
+}
+
+
+/* =========================================
+   FLAP
+========================================= */
+
+.flap {
+    position: absolute;
+
+    top: -1px;
+    left: -1px;
+
+    width: calc(100% + 2px);
+    height: 57%;
+
+    z-index: 8;
+
+    transform-origin: 50% 0%;
+    transform-style: preserve-3d;
+
+    background:
+        linear-gradient(
+            180deg,
+            #fffefa 0%,
+            #f5eee1 100%
+        );
+
+    clip-path: polygon(
+        0 0,
+        100% 0,
+        50% 100%
+    );
+
+    border-top: 1px solid rgba(155,122,62,.25);
+
+    transform:
+        translateZ(55px)
+        rotateX(0deg);
+}
+
+.flap::after {
+    content: "";
+
+    position: absolute;
+    inset: 0;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(255,255,255,.8),
+            transparent 40%
+        );
+
+    backface-visibility: hidden;
+}
+
+
+/* =========================================
+   WAX SEAL
+========================================= */
 
 .seal {
     position: absolute;
 
     left: 50%;
-    top: 51%;
+    top: 50%;
 
-    width: 86px;
-    height: 86px;
-
-    z-index: 30;
-
-    border: 1px solid #8b6427;
-
-    border-radius: 50%;
-
-    background:
-        radial-gradient(
-            circle at 30% 25%,
-            #f7e5aa,
-            #c29a50 60%,
-            #896025
-        );
-
-    color: white;
-
-    font-family: "Cormorant Garamond", serif;
-
-    font-size: 18px;
-
-    box-shadow:
-        0 10px 25px rgba(60, 40, 10, .3),
-        inset 0 0 0 5px rgba(255, 245, 205, .2);
+    width: 104px;
+    height: 104px;
 
     transform:
         translate(-50%, -50%)
-        translateZ(80px);
+        translateZ(120px);
+
+    z-index: 20;
+
+    border-radius: 50%;
+    border: 0;
 
     cursor: pointer;
 
-    touch-action: manipulation;
+    color: #fffdf8;
 
-    padding: 0;
+    background:
+        radial-gradient(
+            circle at 35% 30%,
+            #f2d890 0%,
+            #c7a45b 35%,
+            #9a7736 70%,
+            #725421 100%
+        );
+
+    box-shadow:
+        0 12px 18px rgba(78,55,17,.28),
+        inset 0 3px 6px rgba(255,255,255,.45),
+        inset 0 -7px 10px rgba(75,48,10,.25);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 2px;
+
+    font-family: "Cormorant Garamond", serif;
+    font-size: 23px;
 }
 
+.seal::before {
+    content: "";
+
+    position: absolute;
+    inset: 7px;
+
+    border-radius: 50%;
+
+    border: 1px solid rgba(255,255,255,.35);
+}
 
 .seal span {
-    margin: 0 2px;
+    font-family: "Great Vibes", cursive;
+    font-size: 31px;
+
+    position: relative;
+    z-index: 2;
+}
+
+.seal b {
+    font-family: "Cormorant Garamond", serif;
+    font-size: 20px;
+    font-weight: 400;
+}
+
+.seal:hover {
+    transform:
+        translate(-50%, -50%)
+        translateZ(145px)
+        scale(1.08);
 }
 
 
-.seal small {
-    font-size: 11px;
-}
+/* =========================================
+   TEXT
+========================================= */
 
-
-/* =================================
-   INSTRUCTION
-================================= */
-
-.instruction {
+.open-text {
     position: absolute;
+    bottom: 12vh;
 
-    bottom: 9%;
+    font-size: 10px;
+    letter-spacing: 5px;
 
-    left: 50%;
+    color: var(--gold-dark);
+    opacity: .75;
 
-    transform: translateX(-50%);
+    animation:
+        breathe 2.5s ease-in-out infinite;
+}
 
-    white-space: nowrap;
+.hint {
+    position: absolute;
+    bottom: 8vh;
 
-    font-family: "Montserrat", sans-serif;
+    font-family: "Cormorant Garamond", serif;
+    font-size: 15px;
 
-    font-size: 9px;
+    letter-spacing: 1px;
 
-    letter-spacing: .3em;
+    color: #a68a57;
+    opacity: .55;
+}
 
-    color: #806b49;
+@keyframes breathe {
+    0%, 100% {
+        opacity: .35;
+        transform: translateY(0);
+    }
 
-    animation: breathe 2s infinite;
-
-    transition: opacity .4s ease;
+    50% {
+        opacity: 1;
+        transform: translateY(-4px);
+    }
 }
 
 
-/* =================================
-   OPEN ANIMATION
-================================= */
+/* =========================================
+   REAL ENVELOPE OPENING
+========================================= */
 
-
-/* CAMERA */
-
-.opening.opening-animation .camera {
+.envelope.open {
     animation:
-        cameraMove
-        7s
-        cubic-bezier(.2,.8,.2,1)
-        forwards;
-}
-
-
-/* ENVELOPE */
-
-.opening.opening-animation .envelope {
-    animation:
-        envelopeMove
-        7s
-        cubic-bezier(.2,.8,.2,1)
-        forwards;
-}
-
-
-/* SEAL */
-
-.opening.opening-animation .seal {
-    animation:
-        sealOpen
-        .9s
-        .2s
-        cubic-bezier(.15,.9,.2,1)
-        forwards;
-}
-
-
-/* FLAP */
-
-.opening.opening-animation .flap {
-    animation:
-        flapOpen
+        envelopeOpen
         1.8s
-        1s
-        cubic-bezier(.2,.8,.15,1)
+        cubic-bezier(.2,.8,.2,1)
         forwards;
 }
 
-
-/* LEFT */
-
-.opening.opening-animation .fold.left {
-    animation:
-        leftOpen
-        1.4s
-        2.1s
-        ease
-        forwards;
-}
-
-
-/* RIGHT */
-
-.opening.opening-animation .fold.right {
-    animation:
-        rightOpen
-        1.4s
-        2.1s
-        ease
-        forwards;
-}
-
-
-/* BOTTOM */
-
-.opening.opening-animation .fold.bottom {
-    animation:
-        bottomOpen
-        1.4s
-        2.1s
-        ease
-        forwards;
-}
-
-
-/* LETTER */
-
-.opening.opening-animation .letter {
-    animation:
-        letterOut
-        3.8s
-        2s
-        cubic-bezier(.15,.8,.15,1)
-        forwards;
-}
-
-
-/* TEXT */
-
-.opening.opening-animation .instruction {
-    opacity: 0;
-}
-
-
-/* =================================
-   CAMERA ANIMATION
-================================= */
-
-@keyframes cameraMove {
+@keyframes envelopeOpen {
 
     0% {
-        transform: scale(1);
-    }
-
-    25% {
-        transform: scale(1.13);
-    }
-
-    55% {
-        transform: scale(1.08);
-    }
-
-    100% {
-        transform: scale(1);
-    }
-}
-
-
-/* =================================
-   ENVELOPE MOVEMENT
-================================= */
-
-@keyframes envelopeMove {
-
-    0% {
-        transform:
-            rotateX(0)
-            rotateY(0)
-            rotateZ(0);
-    }
-
-    20% {
         transform:
             rotateX(7deg)
-            rotateY(-9deg)
-            rotateZ(-1deg)
-            translateY(-7px);
+            rotateY(-7deg)
+            translateZ(0);
     }
 
-    40% {
+    30% {
         transform:
-            rotateX(-4deg)
-            rotateY(7deg)
-            rotateZ(1deg);
+            rotateX(3deg)
+            rotateY(4deg)
+            translateZ(50px);
     }
 
-    65% {
+    60% {
         transform:
-            rotateX(2deg)
-            rotateY(-3deg);
+            rotateX(-2deg)
+            rotateY(-2deg)
+            translateZ(100px);
     }
 
     100% {
         transform:
-            rotateX(0)
-            rotateY(0)
-            rotateZ(0);
+            rotateX(0deg)
+            rotateY(0deg)
+            translateZ(80px);
     }
 }
 
 
-/* =================================
-   SEAL BREAK
-================================= */
+/* =========================================
+   SEAL OPENS
+========================================= */
+
+.envelope.open .seal {
+    animation:
+        sealOpen
+        .8s
+        ease
+        forwards;
+}
 
 @keyframes sealOpen {
 
     0% {
         transform:
             translate(-50%, -50%)
-            translateZ(80px)
-            scale(1)
-            rotate(0);
+            translateZ(120px)
+            scale(1);
 
         opacity: 1;
     }
 
-    45% {
+    50% {
         transform:
             translate(-50%, -50%)
-            translateZ(150px)
-            scale(1.18)
-            rotate(8deg);
+            translateZ(200px)
+            scale(1.15)
+            rotateZ(8deg);
 
         opacity: 1;
     }
@@ -646,405 +574,480 @@ body {
     100% {
         transform:
             translate(-50%, -50%)
-            translateZ(250px)
-            scale(.1)
-            rotate(25deg);
+            translateZ(260px)
+            scale(.7)
+            rotateZ(15deg);
 
         opacity: 0;
     }
 }
 
 
-/* =================================
-   FLAP REAL OPEN
-================================= */
+/* =========================================
+   REAL FLAP OPENING
+========================================= */
 
-@keyframes flapOpen {
+.envelope.open .flap {
+    animation:
+        openFlap
+        1.5s
+        .45s
+        cubic-bezier(.2,.8,.2,1)
+        forwards;
+}
+
+@keyframes openFlap {
 
     0% {
         transform:
+            translateZ(55px)
             rotateX(0deg);
     }
 
-    25% {
+    30% {
         transform:
-            rotateX(-55deg);
+            translateZ(75px)
+            rotateX(-45deg);
     }
 
-    55% {
+    65% {
         transform:
+            translateZ(90px)
             rotateX(-120deg);
     }
 
     100% {
         transform:
-            rotateX(-180deg);
-    }
-}
-
-
-/* =================================
-   FOLDS
-================================= */
-
-@keyframes leftOpen {
-
-    0% {
-        transform:
-            rotateY(0)
-            translateX(0);
-
-        opacity: 1;
-    }
-
-    100% {
-        transform:
-            rotateY(28deg)
-            translateX(-45px);
-
-        opacity: .35;
-    }
-}
-
-
-@keyframes rightOpen {
-
-    0% {
-        transform:
-            rotateY(0)
-            translateX(0);
-
-        opacity: 1;
-    }
-
-    100% {
-        transform:
-            rotateY(-28deg)
-            translateX(45px);
-
-        opacity: .35;
-    }
-}
-
-
-@keyframes bottomOpen {
-
-    0% {
-        transform:
-            rotateX(0)
-            translateY(0);
-
-        opacity: 1;
-    }
-
-    100% {
-        transform:
-            rotateX(35deg)
-            translateY(25px);
-
-        opacity: .3;
-    }
-}
-
-
-/* =================================
-   LETTER COMES OUT
-================================= */
-
-@keyframes letterOut {
-
-    0% {
-        opacity: 0;
-
-        transform:
-            translateY(42%)
-            translateZ(10px)
-            scale(.82);
-    }
-
-    20% {
-        opacity: 1;
-
-        transform:
-            translateY(15%)
-            translateZ(30px)
-            scale(.88);
-    }
-
-    45% {
-        opacity: 1;
-
-        transform:
-            translateY(-15%)
-            translateZ(60px)
-            scale(.94);
-    }
-
-    70% {
-        opacity: 1;
-
-        transform:
-            translateY(-42%)
             translateZ(100px)
-            scale(1);
-    }
-
-    100% {
-        opacity: 1;
-
-        transform:
-            translateY(-70%)
-            translateZ(140px)
-            scale(1.08);
+            rotateX(-175deg);
     }
 }
 
 
-/* =================================
+/* =========================================
+   FOLDS MOVE
+========================================= */
+
+.envelope.open .left-fold {
+    animation:
+        openLeft
+        1.2s
+        .8s
+        ease
+        forwards;
+}
+
+.envelope.open .right-fold {
+    animation:
+        openRight
+        1.2s
+        .8s
+        ease
+        forwards;
+}
+
+.envelope.open .bottom-fold {
+    animation:
+        openBottom
+        1.2s
+        .8s
+        ease
+        forwards;
+}
+
+@keyframes openLeft {
+
+    0% {
+        transform:
+            translateZ(20px)
+            translateX(0)
+            rotateY(0deg);
+    }
+
+    100% {
+        transform:
+            translateZ(35px)
+            translateX(-18px)
+            rotateY(-8deg);
+    }
+}
+
+@keyframes openRight {
+
+    0% {
+        transform:
+            translateZ(21px)
+            translateX(0)
+            rotateY(0deg);
+    }
+
+    100% {
+        transform:
+            translateZ(35px)
+            translateX(18px)
+            rotateY(8deg);
+    }
+}
+
+@keyframes openBottom {
+
+    0% {
+        transform:
+            translateZ(25px)
+            rotateX(0deg);
+    }
+
+    100% {
+        transform:
+            translateZ(40px)
+            rotateX(12deg);
+    }
+}
+
+
+/* =========================================
+   LETTER STAYS INSIDE
+========================================= */
+
+.envelope.open .inside-letter {
+    transform:
+        translateZ(25px)
+        translateY(13%);
+}
+
+
+/* =========================================
    FINAL INVITATION
-================================= */
+   KEPT HIDDEN
+========================================= */
 
 .invitation {
     position: fixed;
-
     inset: 0;
 
-    z-index: 1;
+    z-index: 10;
 
     display: flex;
-
     align-items: center;
     justify-content: center;
 
-    padding: 25px;
-
-    overflow-y: auto;
+    padding: 30px;
 
     background:
         radial-gradient(
-            circle,
-            #fffdf9,
-            #eee7db
+            circle at center,
+            #ffffff 0%,
+            #fffefa 60%,
+            #f8f4ea 100%
         );
 
     opacity: 0;
-
-    transform: scale(.85);
-
-    pointer-events: none;
-
-    transition:
-        opacity 1.5s ease,
-        transform 1.5s ease;
+    visibility: hidden;
 }
 
 
-.invitation-card {
-    width: min(90vw, 720px);
+/* =========================================
+   INVITATION DESIGN
+========================================= */
 
-    padding: 60px 25px;
+.invitation-border {
+    position: relative;
 
-    text-align: center;
+    width: min(900px, 94vw);
+    height: min(700px, 88vh);
 
-    background: rgba(255,253,248,.8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
-    border: 1px solid rgba(160,125,65,.35);
+    border: 1px solid rgba(184,149,82,.55);
 
     box-shadow:
-        0 25px 70px rgba(50,38,25,.12);
+        0 20px 70px rgba(90,70,30,.08),
+        inset 0 0 70px rgba(184,149,82,.04);
 }
 
+.invitation-border::before {
+    content: "";
 
-.star {
-    color: #a7854b;
+    position: absolute;
+    inset: 10px;
 
-    font-size: 20px;
-
-    margin-bottom: 18px;
+    border: 1px solid rgba(184,149,82,.18);
 }
 
+.corner {
+    position: absolute;
 
-.final-name {
-    margin: 18px 0;
+    width: 55px;
+    height: 55px;
+
+    border-color: var(--gold);
+    border-style: solid;
+
+    opacity: .75;
+}
+
+.top-left {
+    top: -1px;
+    left: -1px;
+    border-width: 2px 0 0 2px;
+}
+
+.top-right {
+    top: -1px;
+    right: -1px;
+    border-width: 2px 2px 0 0;
+}
+
+.bottom-left {
+    bottom: -1px;
+    left: -1px;
+    border-width: 0 0 2px 2px;
+}
+
+.bottom-right {
+    bottom: -1px;
+    right: -1px;
+    border-width: 0 2px 2px 0;
+}
+
+.invitation-content {
+    text-align: center;
+
+    color: var(--gold-dark);
+
+    width: 90%;
+}
+
+.small-heading {
+    font-size: 10px;
+    letter-spacing: 6px;
+
+    color: #a48958;
+
+    margin-bottom: 35px;
+}
+
+.names {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 25px;
 
     font-family: "Great Vibes", cursive;
 
-    font-size: clamp(70px, 14vw, 110px);
+    font-size: clamp(70px, 9vw, 125px);
+    line-height: .9;
 
-    line-height: .7;
+    color: var(--gold);
 }
 
+.ampersand {
+    font-family: "Cormorant Garamond", serif;
 
-.final-ampersand {
-    color: #9b7a3d;
+    font-size: 40px;
 
-    font-size: 28px;
+    color: var(--gold-dark);
+
+    margin-top: 18px;
 }
 
+.ornament {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 12px;
+
+    margin: 40px auto;
+
+    width: 240px;
+}
+
+.ornament span {
+    height: 1px;
+    flex: 1;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            var(--gold)
+        );
+}
+
+.ornament span:last-child {
+    background:
+        linear-gradient(
+            90deg,
+            var(--gold),
+            transparent
+        );
+}
+
+.ornament i {
+    font-size: 13px;
+    font-style: normal;
+    color: var(--gold);
+}
 
 .details {
     display: flex;
-
+    align-items: center;
     justify-content: center;
 
-    gap: 60px;
-
-    margin-top: 35px;
-
-    font-family: "Montserrat", sans-serif;
+    gap: 50px;
 }
 
-
-.details div {
+.detail {
     display: flex;
-
     flex-direction: column;
-
-    gap: 8px;
+    gap: 9px;
 }
 
-
-.details span {
+.detail small {
     font-size: 9px;
-
-    letter-spacing: .25em;
-
-    color: #927748;
+    letter-spacing: 4px;
+    color: #a28a5d;
 }
 
+.detail strong {
+    font-family: "Cormorant Garamond", serif;
 
-.details strong {
-    font-size: 12px;
-
-    letter-spacing: .12em;
-
+    font-size: 20px;
     font-weight: 500;
+
+    letter-spacing: 2px;
+
+    color: #8f713d;
 }
 
+.divider {
+    width: 1px;
+    height: 45px;
 
-.invitation-card p {
-    margin-top: 35px;
+    background: rgba(184,149,82,.4);
+}
 
-    font-size: 19px;
+.quote {
+    margin-top: 48px;
 
+    font-family: "Cormorant Garamond", serif;
+
+    font-size: 23px;
     font-style: italic;
+
+    letter-spacing: 1px;
+
+    color: #927642;
+}
+
+.closing {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 15px;
+
+    margin-top: 38px;
+
+    font-family: "Great Vibes", cursive;
+
+    font-size: 25px;
+
+    color: var(--gold);
+}
+
+.closing span {
+    width: 45px;
+    height: 1px;
+
+    background: rgba(184,149,82,.5);
 }
 
 
-/* =================================
-   REVEAL
-================================= */
-
-body.revealed .opening {
-    opacity: 0;
-
-    visibility: hidden;
-
-    pointer-events: none;
-}
-
-
-body.revealed .invitation {
-    opacity: 1;
-
-    transform: scale(1);
-
-    pointer-events: auto;
-}
-
-
-/* =================================
-   BREATH
-================================= */
-
-@keyframes breathe {
-
-    0%,
-    100% {
-        opacity: 1;
-    }
-
-    50% {
-        opacity: .35;
-    }
-}
-
-
-/* =================================
+/* =========================================
    MOBILE
-================================= */
+========================================= */
 
-@media (max-width: 600px) {
+@media (max-width: 700px) {
 
-    .envelope-scene {
-        width: 94vw;
-        height: 65vw;
+    .opening-title {
+        top: 7vh;
 
-        perspective: 1000px;
+        font-size: 8px;
+        letter-spacing: 4px;
     }
 
-
-    .envelope {
-        width: 90vw;
-        height: 56vw;
+    .camera {
+        height: 470px;
     }
 
-
-    .fold.left {
-        border-left-width: 45vw;
-        border-top-width: 28vw;
-        border-bottom-width: 28vw;
+    .envelope-area {
+        width: 88vw;
     }
-
-
-    .fold.right {
-        border-right-width: 45vw;
-        border-top-width: 28vw;
-        border-bottom-width: 28vw;
-    }
-
-
-    .fold.bottom {
-        border-left-width: 45vw;
-        border-right-width: 45vw;
-        border-bottom-width: 30vw;
-    }
-
 
     .seal {
-        width: 76px;
-        height: 76px;
+        width: 84px;
+        height: 84px;
     }
 
-
-    .mini-title {
-        font-size: 6.5px;
+    .seal span {
+        font-size: 25px;
     }
 
-
-    .name {
-        font-size: 40px;
+    .seal b {
+        font-size: 17px;
     }
 
+    .names {
+        flex-direction: column;
+        gap: 3px;
 
-    .quote {
-        font-size: 12px;
+        font-size: 78px;
     }
 
+    .ampersand {
+        font-size: 32px;
+        margin: 0;
+    }
 
     .details {
         flex-direction: column;
-
-        gap: 20px;
+        gap: 22px;
     }
 
-
-    .invitation-card {
-        padding: 50px 18px;
+    .divider {
+        width: 55px;
+        height: 1px;
     }
 
+    .quote {
+        font-size: 20px;
+    }
 
-    .final-name {
-        font-size: 70px;
+    .invitation-border {
+        height: 82vh;
+    }
+
+    .small-heading {
+        letter-spacing: 4px;
+        margin-bottom: 28px;
     }
 }
+
+
+/* Reduced motion */
+
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+        animation-duration: .01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: .01ms !important;
+    }
+}
+
