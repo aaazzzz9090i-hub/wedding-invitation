@@ -1094,3 +1094,23 @@ body {
         transition-duration: .01ms !important;
     }
 }
+
+
+/* =========================================
+   MOBILE TOUCH FIX
+========================================= */
+
+.envelope-area,
+.envelope,
+.seal {
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+}
+
+.envelope-area {
+    cursor: pointer;
+}
+
+.seal {
+    pointer-events: auto;
+}
