@@ -1068,3 +1068,26 @@ body {
         transition-duration: .01ms !important;
     }
 }
+/* =========================================
+   MOBILE TOUCH FIX
+========================================= */
+
+.opening {
+    touch-action: manipulation;
+}
+
+.envelope-area,
+.envelope {
+    -webkit-tap-highlight-color: transparent;
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+.envelope-body,
+.flap,
+.left-fold,
+.right-fold,
+.bottom-fold,
+.seal {
+    pointer-events: none;
+}
