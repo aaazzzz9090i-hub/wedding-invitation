@@ -62,6 +62,7 @@ body {
     font-weight: 400;
 
     color: var(--gold-dark);
+
     opacity: .85;
 }
 
@@ -123,6 +124,9 @@ body {
         rotateY(-7deg)
         translateZ(0);
 
+    transition:
+        transform 1.8s cubic-bezier(.22, .8, .25, 1);
+
     filter:
         drop-shadow(0 35px 30px rgba(79, 57, 20, .15));
 }
@@ -160,6 +164,9 @@ body {
 
     box-shadow:
         0 15px 35px rgba(90, 65, 25, .12);
+
+    transition:
+        transform 1.9s cubic-bezier(.16, 1, .3, 1);
 }
 
 .mini-letter {
@@ -219,6 +226,11 @@ body {
         inset 0 -25px 45px rgba(100,70,20,.04);
 }
 
+
+/* =========================================
+   PAPER TEXTURE
+========================================= */
+
 .envelope-paper {
     position: absolute;
     inset: 0;
@@ -273,7 +285,8 @@ body {
     z-index: 3;
 
     transform:
-        translateZ(20px);
+        translateZ(20px)
+        translateX(0);
 }
 
 .right-fold {
@@ -294,7 +307,8 @@ body {
     z-index: 3;
 
     transform:
-        translateZ(21px);
+        translateZ(21px)
+        translateX(0);
 }
 
 .bottom-fold {
@@ -334,6 +348,7 @@ body {
     z-index: 8;
 
     transform-origin: 50% 0%;
+
     transform-style: preserve-3d;
 
     background:
@@ -354,6 +369,9 @@ body {
     transform:
         translateZ(55px)
         rotateX(0deg);
+
+    transition:
+        transform 1.7s cubic-bezier(.22, .8, .25, 1);
 }
 
 .flap::after {
@@ -421,6 +439,11 @@ body {
 
     font-family: "Cormorant Garamond", serif;
     font-size: 23px;
+
+    transition:
+        transform .5s ease,
+        box-shadow .5s ease,
+        opacity .5s ease;
 }
 
 .seal::before {
@@ -453,6 +476,10 @@ body {
         translate(-50%, -50%)
         translateZ(145px)
         scale(1.08);
+
+    box-shadow:
+        0 18px 25px rgba(78,55,17,.35),
+        inset 0 3px 6px rgba(255,255,255,.5);
 }
 
 
@@ -478,7 +505,6 @@ body {
 
 .hint {
     position: absolute;
-
     bottom: 8vh;
 
     font-family: "Cormorant Garamond", serif;
@@ -507,69 +533,18 @@ body {
 
 
 /* =========================================
-   CINEMATIC OPENING
+   SIMPLE & SMOOTH ENVELOPE OPENING
 ========================================= */
 
-.opening.cinematic .camera {
+.envelope.open {
     animation:
-        cameraMove
-        4.2s
-        cubic-bezier(.16, 1, .3, 1)
-        forwards;
-}
-
-.opening.cinematic .envelope {
-    animation:
-        envelopeCinematic
-        4.2s
-        cubic-bezier(.16, 1, .3, 1)
-        forwards;
+        envelopeOpen 1.8s cubic-bezier(.22, .8, .25, 1) forwards;
 }
 
 
-/* =========================================
-   CAMERA MOVEMENT
-========================================= */
+/* Envelope movement */
 
-@keyframes cameraMove {
-
-    0% {
-        transform:
-            translateZ(0)
-            scale(1);
-    }
-
-    25% {
-        transform:
-            translateZ(120px)
-            scale(1.05);
-    }
-
-    50% {
-        transform:
-            translateZ(300px)
-            scale(1.12);
-    }
-
-    75% {
-        transform:
-            translateZ(480px)
-            scale(1.22);
-    }
-
-    100% {
-        transform:
-            translateZ(650px)
-            scale(1.35);
-    }
-}
-
-
-/* =========================================
-   ENVELOPE MOVEMENT
-========================================= */
-
-@keyframes envelopeCinematic {
+@keyframes envelopeOpen {
 
     0% {
         transform:
@@ -578,96 +553,81 @@ body {
             translateZ(0);
     }
 
-    18% {
-        transform:
-            rotateX(4deg)
-            rotateY(5deg)
-            translateZ(40px);
-    }
-
     35% {
         transform:
-            rotateX(-4deg)
-            rotateY(-4deg)
-            translateZ(90px);
+            rotateX(3deg)
+            rotateY(3deg)
+            translateZ(35px);
     }
 
-    55% {
+    70% {
         transform:
-            rotateX(0deg)
-            rotateY(0deg)
-            translateZ(160px)
-            scale(1.04);
+            rotateX(-1deg)
+            rotateY(-1deg)
+            translateZ(65px);
     }
 
     100% {
         transform:
             rotateX(0deg)
             rotateY(0deg)
-            translateZ(230px)
-            scale(1.1);
+            translateZ(80px);
     }
 }
 
 
 /* =========================================
-   SEAL RELEASE
+   SEAL OPENS
 ========================================= */
 
-.opening.cinematic .seal {
+.envelope.open .seal {
     animation:
-        sealRelease
-        1s
-        .35s
-        cubic-bezier(.16, 1, .3, 1)
-        forwards;
+        sealOpen .8s ease-out forwards;
 }
 
-@keyframes sealRelease {
+@keyframes sealOpen {
 
     0% {
-        opacity: 1;
-
         transform:
             translate(-50%, -50%)
             translateZ(120px)
             scale(1);
+
+        opacity: 1;
     }
 
     45% {
         transform:
             translate(-50%, -50%)
-            translateZ(220px)
-            scale(1.25)
-            rotateZ(4deg);
+            translateZ(170px)
+            scale(1.08)
+            rotateZ(5deg);
+
+        opacity: 1;
     }
 
     100% {
-        opacity: 0;
-
         transform:
             translate(-50%, -50%)
-            translateZ(350px)
-            scale(1.5)
-            rotateZ(-8deg);
+            translateZ(210px)
+            scale(.85)
+            rotateZ(8deg);
+
+        opacity: 0;
     }
 }
 
 
 /* =========================================
-   FLAP OPEN
+   REAL FLAP OPENING
 ========================================= */
 
-.opening.cinematic .flap {
+.envelope.open .flap {
     animation:
-        flapCinematic
-        1.5s
-        1s
-        cubic-bezier(.16, 1, .3, 1)
-        forwards;
+        flapOpen 1.7s .25s cubic-bezier(.22, .8, .25, 1) forwards;
 }
 
-@keyframes flapCinematic {
+@keyframes flapOpen {
 
     0% {
         transform:
@@ -675,200 +635,109 @@ body {
             rotateX(0deg);
     }
 
-    25% {
+    35% {
         transform:
-            translateZ(80px)
+            translateZ(70px)
             rotateX(-35deg);
     }
 
-    60% {
+    70% {
         transform:
-            translateZ(100px)
-            rotateX(-120deg);
+            translateZ(85px)
+            rotateX(-110deg);
     }
 
     100% {
         transform:
-            translateZ(105px)
-            rotateX(-178deg);
+            translateZ(95px)
+            rotateX(-175deg);
     }
 }
 
 
 /* =========================================
-   FOLDS MOVE
+   ENVELOPE FOLDS MOVE
 ========================================= */
 
-.opening.cinematic .left-fold {
+.envelope.open .left-fold {
     animation:
-        leftFoldMove
-        1.4s
-        1.25s
-        ease
-        forwards;
+        leftOpen 1.4s .45s ease-out forwards;
 }
 
-.opening.cinematic .right-fold {
+.envelope.open .right-fold {
     animation:
-        rightFoldMove
-        1.4s
-        1.25s
-        ease
-        forwards;
+        rightOpen 1.4s .45s ease-out forwards;
 }
 
-.opening.cinematic .bottom-fold {
+.envelope.open .bottom-fold {
     animation:
-        bottomFoldMove
-        1.4s
-        1.25s
-        ease
-        forwards;
+        bottomOpen 1.4s .45s ease-out forwards;
 }
 
-@keyframes leftFoldMove {
+@keyframes leftOpen {
 
-    0% {
+    from {
         transform:
             translateZ(20px)
+            translateX(0)
             rotateY(0deg);
     }
 
-    100% {
+    to {
         transform:
-            translateZ(45px)
-            rotateY(-8deg)
-            translateX(-8px);
+            translateZ(35px)
+            translateX(-10px)
+            rotateY(-5deg);
     }
 }
 
-@keyframes rightFoldMove {
+@keyframes rightOpen {
 
-    0% {
+    from {
         transform:
             translateZ(21px)
+            translateX(0)
             rotateY(0deg);
     }
 
-    100% {
+    to {
         transform:
-            translateZ(45px)
-            rotateY(8deg)
-            translateX(8px);
+            translateZ(35px)
+            translateX(10px)
+            rotateY(5deg);
     }
 }
 
-@keyframes bottomFoldMove {
+@keyframes bottomOpen {
 
-    0% {
+    from {
         transform:
             translateZ(25px)
             rotateX(0deg);
     }
 
-    100% {
-        transform:
-            translateZ(50px)
-            rotateX(12deg);
-    }
-}
-
-
-/* =========================================
-   LETTER RISE
-========================================= */
-
-.opening.cinematic .inside-letter {
-    animation:
-        letterRise
-        2.4s
-        1.65s
-        cubic-bezier(.16, 1, .3, 1)
-        forwards;
-}
-
-@keyframes letterRise {
-
-    0% {
-        transform:
-            translateZ(25px)
-            translateY(13%)
-            rotateX(0deg)
-            scale(1);
-    }
-
-    25% {
-        transform:
-            translateZ(80px)
-            translateY(-5%)
-            rotateX(-4deg)
-            scale(1.02);
-    }
-
-    55% {
-        transform:
-            translateZ(180px)
-            translateY(-35%)
-            rotateX(0deg)
-            scale(1.1);
-    }
-
-    80% {
-        transform:
-            translateZ(350px)
-            translateY(-55%)
-            rotateX(0deg)
-            scale(1.3);
-    }
-
-    100% {
-        transform:
-            translateZ(500px)
-            translateY(-72%)
-            rotateX(0deg)
-            scale(1.5);
-    }
-}
-
-
-/* =========================================
-   TEXT DISAPPEARS
-========================================= */
-
-.opening.cinematic .opening-title,
-.opening.cinematic .open-text,
-.opening.cinematic .hint {
-
-    animation:
-        fadeAway
-        .7s
-        .4s
-        ease
-        forwards;
-}
-
-@keyframes fadeAway {
-
     to {
-        opacity: 0;
-        transform: translateY(-20px);
+        transform:
+            translateZ(38px)
+            rotateX(8deg);
     }
 }
 
 
 /* =========================================
-   OPENING DISAPPEARS
+   LETTER STAYS INSIDE
 ========================================= */
 
-body.revealed .opening {
-    opacity: 0;
-    visibility: hidden;
-    pointer-events: none;
+.envelope.open .inside-letter {
+    transform:
+        translateZ(25px)
+        translateY(13%);
 }
 
 
 /* =========================================
    FINAL INVITATION
+   Kept hidden — no transition to it
 ========================================= */
 
 .invitation {
@@ -896,19 +765,6 @@ body.revealed .opening {
 
     transform:
         scale(1.08);
-
-    transition:
-        opacity 1.8s cubic-bezier(.16, 1, .3, 1),
-        transform 2s cubic-bezier(.16, 1, .3, 1),
-        visibility 1.8s;
-}
-
-body.revealed .invitation {
-    opacity: 1;
-    visibility: visible;
-
-    transform:
-        scale(1);
 }
 
 
@@ -1000,22 +856,6 @@ body.revealed .invitation {
     color: var(--gold-dark);
 
     width: 90%;
-
-    animation:
-        invitationContent 2s .4s both;
-}
-
-@keyframes invitationContent {
-
-    from {
-        opacity: 0;
-        transform: translateY(25px);
-    }
-
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
 }
 
 .small-heading {
@@ -1032,7 +872,6 @@ body.revealed .invitation {
     display: flex;
     align-items: center;
     justify-content: center;
-
     gap: 25px;
 
     font-family: "Great Vibes", cursive;
@@ -1068,7 +907,6 @@ body.revealed .invitation {
 
 .ornament span {
     height: 1px;
-
     flex: 1;
 
     background:
@@ -1090,9 +928,7 @@ body.revealed .invitation {
 
 .ornament i {
     font-size: 13px;
-
     font-style: normal;
-
     color: var(--gold);
 }
 
@@ -1107,15 +943,12 @@ body.revealed .invitation {
 .detail {
     display: flex;
     flex-direction: column;
-
     gap: 9px;
 }
 
 .detail small {
     font-size: 9px;
-
     letter-spacing: 4px;
-
     color: #a28a5d;
 }
 
@@ -1212,7 +1045,6 @@ body.revealed .invitation {
 
     .names {
         flex-direction: column;
-
         gap: 3px;
 
         font-size: 78px;
@@ -1220,13 +1052,11 @@ body.revealed .invitation {
 
     .ampersand {
         font-size: 32px;
-
         margin: 0;
     }
 
     .details {
         flex-direction: column;
-
         gap: 22px;
     }
 
@@ -1245,7 +1075,6 @@ body.revealed .invitation {
 
     .small-heading {
         letter-spacing: 4px;
-
         margin-bottom: 28px;
     }
 }
@@ -1260,12 +1089,8 @@ body.revealed .invitation {
     *,
     *::before,
     *::after {
-
         animation-duration: .01ms !important;
-
         animation-iteration-count: 1 !important;
-
         transition-duration: .01ms !important;
     }
 }
-
