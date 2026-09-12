@@ -5,47 +5,29 @@ const invitation = document.getElementById("invitation");
 let opened = false;
 
 function openEnvelope() {
-
     if (opened) return;
 
     opened = true;
 
-    // Start envelope opening animation
     envelope.classList.add("open");
 
-    /*
-        Sequence:
-
-        0.00s  → envelope starts opening
-        0.15s  → flap starts opening
-        0.55s  → letter starts coming out
-        2.40s  → transition to invitation
-    */
-
     setTimeout(() => {
-
         opening.classList.add("hide");
         invitation.classList.add("show");
-
     }, 2500);
 }
 
 
-/*
-    Event delegation
-    Works with:
-    - Laptop
-    - Desktop
-    - iPhone
-    - Android
-*/
+// الضغط على الظرف
+envelope.addEventListener("click", openEnvelope);
 
-document.addEventListener("click", function (event) {
 
-    const envelopeClicked =
-        event.target.closest("#envelope");
+// منع الضغط على الختم من عمل أي حاجة مختلفة
+const seal = document.getElementById("seal");
 
-    if (!envelopeClicked) return;
-
-    openEnvelope();
-});
+if (seal) {
+    seal.addEventListener("click", function (event) {
+        event.stopPropagation();
+        openEnvelope();
+    });
+}
