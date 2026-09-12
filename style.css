@@ -1,49 +1,60 @@
 * {
     box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
 }
 
 html,
 body {
     margin: 0;
     width: 100%;
-    min-height: 100%;
+    height: 100%;
 }
 
 body {
-    background: #f5f1e8;
-    color: #29231c;
     overflow: hidden;
+    background: #f5f0e7;
+    color: #2c261f;
     font-family: "Cormorant Garamond", serif;
 }
 
-/* =========================
+
+/* =================================
    OPENING
-========================= */
+================================= */
 
 .opening {
     position: fixed;
     inset: 0;
-    z-index: 10;
+
+    z-index: 100;
 
     display: flex;
     align-items: center;
     justify-content: center;
 
     background:
-        radial-gradient(circle at center,
-        #fffdf9 0%,
-        #f7f2e9 55%,
-        #e9e0d2 100%);
+        radial-gradient(
+            circle at center,
+            #fffefa 0%,
+            #f7f2e9 55%,
+            #e8dfd0 100%
+        );
 
-    perspective: 1400px;
+    perspective: 1200px;
 
     transition:
         opacity 1.4s ease,
         visibility 1.4s ease;
 }
 
-.scene {
+
+/* =================================
+   CAMERA
+================================= */
+
+.camera {
     position: relative;
+
     width: 100%;
     height: 100%;
 
@@ -51,222 +62,261 @@ body {
     align-items: center;
     justify-content: center;
 
-    perspective: 1400px;
+    perspective: 1200px;
+
     transform-style: preserve-3d;
 }
 
-/* =========================
-   ENVELOPE
-========================= */
 
-.envelope-wrapper {
+/* =================================
+   ENVELOPE SCENE
+================================= */
+
+.envelope-scene {
     position: relative;
 
-    width: min(86vw, 650px);
-    height: min(60vw, 450px);
+    width: min(90vw, 620px);
+    height: min(60vw, 410px);
 
     display: flex;
     align-items: center;
     justify-content: center;
 
-    cursor: pointer;
+    perspective: 1200px;
 
-    perspective: 1400px;
     transform-style: preserve-3d;
 }
+
+
+/* =================================
+   ENVELOPE
+================================= */
 
 .envelope {
     position: relative;
 
-    width: min(82vw, 600px);
-    height: min(52vw, 380px);
+    width: min(86vw, 570px);
+    height: min(54vw, 360px);
 
     transform-style: preserve-3d;
+
+    cursor: pointer;
 
     filter:
-        drop-shadow(0 28px 30px rgba(50, 38, 25, .22));
+        drop-shadow(
+            0 25px 30px rgba(55, 43, 28, .22)
+        );
+
+    transition:
+        transform .3s ease;
 }
 
-/* =========================
-   LETTER
-========================= */
 
-.letter {
+/* =================================
+   BACK
+================================= */
+
+.envelope-back {
     position: absolute;
 
-    left: 10%;
-    top: 8%;
-
-    width: 80%;
-    height: 86%;
-
-    z-index: 2;
-
-    background: #fffdf8;
-
-    border: 1px solid rgba(160, 125, 65, .25);
-
-    box-shadow:
-        0 15px 35px rgba(40, 30, 20, .18);
-
-    opacity: 0;
-
-    transform:
-        translateY(42%)
-        translateZ(5px)
-        scale(.82);
-
-    transform-origin: bottom center;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    will-change: transform, opacity;
-}
-
-.letter-inner {
-    width: 100%;
-    text-align: center;
-    padding: 20px;
-}
-
-.small-title {
-    font-family: "Montserrat", sans-serif;
-    font-size: 9px;
-    letter-spacing: .28em;
-    color: #806b49;
-}
-
-.letter h1 {
-    margin: 12px 0;
-
-    font-family: "Great Vibes", cursive;
-    font-size: clamp(45px, 8vw, 70px);
-    font-weight: 400;
-    line-height: .8;
-}
-
-.and {
-    font-size: 22px;
-    color: #9b7a3d;
-}
-
-.gold-line {
-    width: 80px;
-    height: 1px;
-    margin: 18px auto;
-    background: #ae8b4a;
-}
-
-.info {
-    display: flex;
-    justify-content: center;
-    gap: 25px;
-
-    font-family: "Montserrat", sans-serif;
-    font-size: 9px;
-    letter-spacing: .12em;
-
-    color: #806b49;
-}
-
-.letter p {
-    margin-top: 20px;
-    font-size: 16px;
-    font-style: italic;
-}
-
-/* =========================
-   ENVELOPE BODY
-========================= */
-
-.envelope-body {
-    position: absolute;
     inset: 0;
 
-    z-index: 4;
-
-    transform-style: preserve-3d;
-}
-
-.paper {
-    position: absolute;
-    inset: 0;
+    z-index: 1;
 
     background:
         linear-gradient(
             145deg,
             #fffdf8,
-            #e5ddcf
+            #e3dacc
         );
 
     border: 1px solid rgba(120, 90, 40, .18);
+
+    border-radius: 2px;
+
+    transform: translateZ(0);
+
 }
 
-/* LEFT */
 
-.left-fold {
+/* =================================
+   LETTER
+================================= */
+
+.letter {
     position: absolute;
 
-    left: 0;
-    bottom: 0;
+    left: 8%;
+    top: 7%;
+
+    width: 84%;
+    height: 90%;
+
+    z-index: 3;
+
+    background: #fffdf9;
+
+    border: 1px solid rgba(160, 125, 65, .25);
+
+    box-shadow:
+        0 12px 30px rgba(40, 30, 20, .18);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    opacity: 0;
+
+    transform:
+        translateY(42%)
+        translateZ(10px)
+        scale(.82);
+
+    transform-origin: bottom center;
+
+    transition: none;
+}
+
+
+.letter-content {
+    width: 100%;
+
+    padding: 15px;
+
+    text-align: center;
+}
+
+
+.mini-title {
+    font-family: "Montserrat", sans-serif;
+
+    font-size: 8px;
+
+    letter-spacing: .25em;
+
+    color: #806b49;
+}
+
+
+.name {
+    margin: 12px 0 4px;
+
+    font-family: "Great Vibes", cursive;
+
+    font-size: clamp(48px, 9vw, 72px);
+
+    font-weight: 400;
+
+    line-height: .8;
+}
+
+
+.ampersand {
+    color: #a27c39;
+
+    font-size: 23px;
+}
+
+
+.line {
+    width: 75px;
+    height: 1px;
+
+    margin: 17px auto;
+
+    background: #ae8b4a;
+}
+
+
+.date,
+.venue {
+    font-family: "Montserrat", sans-serif;
+
+    font-size: 9px;
+
+    letter-spacing: .13em;
+
+    color: #806b49;
+}
+
+
+.venue {
+    margin-top: 8px;
+}
+
+
+.quote {
+    margin-top: 18px;
+
+    font-size: 15px;
+
+    font-style: italic;
+}
+
+
+/* =================================
+   SIDE FOLDS
+================================= */
+
+.fold {
+    position: absolute;
+
+    z-index: 6;
 
     width: 0;
     height: 0;
 
-    border-top: 190px solid transparent;
-    border-bottom: 190px solid transparent;
-    border-left: 300px solid #ded4c4;
+    transform-style: preserve-3d;
 
-    z-index: 5;
+    transition: none;
+}
+
+
+/* LEFT */
+
+.fold.left {
+    left: 0;
+    bottom: 0;
+
+    border-top: 180px solid transparent;
+    border-bottom: 180px solid transparent;
+    border-left: 285px solid #ddd3c3;
 
     transform-origin: left center;
 }
 
+
 /* RIGHT */
 
-.right-fold {
-    position: absolute;
-
+.fold.right {
     right: 0;
     bottom: 0;
 
-    width: 0;
-    height: 0;
-
-    border-top: 190px solid transparent;
-    border-bottom: 190px solid transparent;
-    border-right: 300px solid #e7ded0;
-
-    z-index: 5;
+    border-top: 180px solid transparent;
+    border-bottom: 180px solid transparent;
+    border-right: 285px solid #e8dfd1;
 
     transform-origin: right center;
 }
 
+
 /* BOTTOM */
 
-.bottom-fold {
-    position: absolute;
-
+.fold.bottom {
     left: 0;
     bottom: 0;
 
-    width: 0;
-    height: 0;
-
-    border-left: 300px solid transparent;
-    border-right: 300px solid transparent;
-    border-bottom: 205px solid #d6ccbc;
-
-    z-index: 6;
+    border-left: 285px solid transparent;
+    border-right: 285px solid transparent;
+    border-bottom: 195px solid #d3c8b7;
 
     transform-origin: center bottom;
 }
 
-/* =========================
-   FLAP
-========================= */
+
+/* =================================
+   TOP FLAP
+================================= */
 
 .flap {
     position: absolute;
@@ -277,11 +327,13 @@ body {
     width: 100%;
     height: 55%;
 
+    z-index: 10;
+
     background:
         linear-gradient(
             145deg,
-            #faf7f0,
-            #dcd2c2
+            #fbf8f1,
+            #d9cfbf
         );
 
     clip-path:
@@ -293,9 +345,8 @@ body {
 
     transform-origin: 50% 0%;
 
-    transform: rotateX(0deg);
-
-    z-index: 8;
+    transform:
+        rotateX(0deg);
 
     transform-style: preserve-3d;
 
@@ -304,9 +355,10 @@ body {
     will-change: transform;
 }
 
-/* =========================
-   GOLD SEAL
-========================= */
+
+/* =================================
+   SEAL
+================================= */
 
 .seal {
     position: absolute;
@@ -314,58 +366,69 @@ body {
     left: 50%;
     top: 51%;
 
-    width: 92px;
-    height: 92px;
+    width: 86px;
+    height: 86px;
 
-    transform:
-        translate(-50%, -50%)
-        translateZ(60px);
+    z-index: 30;
 
-    z-index: 20;
+    border: 1px solid #8b6427;
 
     border-radius: 50%;
-
-    border: 1px solid #8d682c;
 
     background:
         radial-gradient(
             circle at 30% 25%,
-            #f7e4a8,
-            #c39a51 60%,
-            #8a6227
+            #f7e5aa,
+            #c29a50 60%,
+            #896025
         );
 
     color: white;
-
-    box-shadow:
-        0 10px 25px rgba(60, 40, 10, .3),
-        inset 0 0 0 5px rgba(255, 245, 205, .2);
 
     font-family: "Cormorant Garamond", serif;
 
     font-size: 18px;
 
+    box-shadow:
+        0 10px 25px rgba(60, 40, 10, .3),
+        inset 0 0 0 5px rgba(255, 245, 205, .2);
+
+    transform:
+        translate(-50%, -50%)
+        translateZ(80px);
+
     cursor: pointer;
 
-    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+
+    padding: 0;
 }
+
 
 .seal span {
     margin: 0 2px;
 }
 
+
 .seal small {
     font-size: 11px;
 }
 
-/* =========================
-   TEXT
-========================= */
 
-.tap-text {
+/* =================================
+   INSTRUCTION
+================================= */
+
+.instruction {
     position: absolute;
 
-    bottom: 8%;
+    bottom: 9%;
+
+    left: 50%;
+
+    transform: translateX(-50%);
+
+    white-space: nowrap;
 
     font-family: "Montserrat", sans-serif;
 
@@ -377,225 +440,128 @@ body {
 
     animation: breathe 2s infinite;
 
-    transition: opacity .5s ease;
+    transition: opacity .4s ease;
 }
 
-/* =========================
-   ANIMATION START
-========================= */
 
-.opening.opening-animation .scene {
+/* =================================
+   OPEN ANIMATION
+================================= */
+
+
+/* CAMERA */
+
+.opening.opening-animation .camera {
     animation:
-        cameraZoom 7s cubic-bezier(.2,.8,.2,1) forwards;
+        cameraMove
+        7s
+        cubic-bezier(.2,.8,.2,1)
+        forwards;
 }
+
+
+/* ENVELOPE */
 
 .opening.opening-animation .envelope {
     animation:
-        envelopeTilt 7s cubic-bezier(.2,.8,.2,1) forwards;
+        envelopeMove
+        7s
+        cubic-bezier(.2,.8,.2,1)
+        forwards;
 }
+
 
 /* SEAL */
 
 .opening.opening-animation .seal {
     animation:
-        sealBreak
-        1s
-        .25s
+        sealOpen
+        .9s
+        .2s
         cubic-bezier(.15,.9,.2,1)
         forwards;
 }
+
 
 /* FLAP */
 
 .opening.opening-animation .flap {
     animation:
-        realFlapOpen
-        2s
+        flapOpen
+        1.8s
         1s
         cubic-bezier(.2,.8,.15,1)
         forwards;
 }
 
-/* SIDES */
 
-.opening.opening-animation .left-fold {
+/* LEFT */
+
+.opening.opening-animation .fold.left {
     animation:
         leftOpen
-        1.5s
-        2.3s
+        1.4s
+        2.1s
         ease
         forwards;
 }
 
-.opening.opening-animation .right-fold {
+
+/* RIGHT */
+
+.opening.opening-animation .fold.right {
     animation:
         rightOpen
-        1.5s
-        2.3s
+        1.4s
+        2.1s
         ease
         forwards;
 }
 
-.opening.opening-animation .bottom-fold {
+
+/* BOTTOM */
+
+.opening.opening-animation .fold.bottom {
     animation:
         bottomOpen
-        1.5s
-        2.3s
+        1.4s
+        2.1s
         ease
         forwards;
 }
+
 
 /* LETTER */
 
 .opening.opening-animation .letter {
     animation:
-        letterComesOut
-        3.6s
+        letterOut
+        3.8s
         2s
         cubic-bezier(.15,.8,.15,1)
         forwards;
 }
 
-.opening.opening-animation .tap-text {
+
+/* TEXT */
+
+.opening.opening-animation .instruction {
     opacity: 0;
 }
 
-/* =========================
-   FINAL INVITATION
-========================= */
 
-.invitation {
-    position: fixed;
-    inset: 0;
+/* =================================
+   CAMERA ANIMATION
+================================= */
 
-    z-index: 1;
-
-    overflow: auto;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    padding: 30px;
-
-    opacity: 0;
-
-    transform: scale(.85);
-
-    pointer-events: none;
-
-    background:
-        radial-gradient(
-            circle,
-            #fffdf9,
-            #eee7db
-        );
-
-    transition:
-        opacity 1.5s ease,
-        transform 1.5s cubic-bezier(.2,.8,.2,1);
-}
-
-.invitation-card {
-    width: min(88vw, 720px);
-
-    padding: 70px 30px;
-
-    text-align: center;
-
-    background: rgba(255,253,248,.75);
-
-    border: 1px solid rgba(160,125,65,.35);
-
-    box-shadow:
-        0 25px 70px rgba(50,38,25,.12);
-}
-
-.ornament {
-    color: #a7854b;
-    font-size: 20px;
-    margin-bottom: 20px;
-}
-
-.invitation h2 {
-    margin: 18px 0;
-
-    font-family: "Great Vibes", cursive;
-
-    font-size: clamp(70px,13vw,110px);
-
-    font-weight: 400;
-
-    line-height: .75;
-}
-
-.big-and {
-    color: #9b7a3d;
-    font-size: 28px;
-}
-
-.final-info {
-    display: flex;
-    justify-content: center;
-    gap: 60px;
-
-    margin-top: 35px;
-
-    font-family: "Montserrat", sans-serif;
-}
-
-.final-info div {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-}
-
-.final-info span {
-    font-size: 9px;
-    letter-spacing: .25em;
-    color: #927748;
-}
-
-.final-info strong {
-    font-size: 12px;
-    letter-spacing: .12em;
-    font-weight: 500;
-}
-
-.quote {
-    margin-top: 35px;
-    font-size: 19px;
-    font-style: italic;
-}
-
-/* =========================
-   REVEAL
-========================= */
-
-body.revealed .opening {
-    opacity: 0;
-    visibility: hidden;
-    pointer-events: none;
-}
-
-body.revealed .invitation {
-    opacity: 1;
-    transform: scale(1);
-    pointer-events: auto;
-}
-
-/* =========================
-   KEYFRAMES
-========================= */
-
-@keyframes cameraZoom {
+@keyframes cameraMove {
 
     0% {
         transform: scale(1);
     }
 
     25% {
-        transform: scale(1.12);
+        transform: scale(1.13);
     }
 
     55% {
@@ -607,7 +573,12 @@ body.revealed .invitation {
     }
 }
 
-@keyframes envelopeTilt {
+
+/* =================================
+   ENVELOPE MOVEMENT
+================================= */
+
+@keyframes envelopeMove {
 
     0% {
         transform:
@@ -621,10 +592,10 @@ body.revealed .invitation {
             rotateX(7deg)
             rotateY(-9deg)
             rotateZ(-1deg)
-            translateY(-8px);
+            translateY(-7px);
     }
 
-    42% {
+    40% {
         transform:
             rotateX(-4deg)
             rotateY(7deg)
@@ -645,16 +616,19 @@ body.revealed .invitation {
     }
 }
 
-/* SEAL */
 
-@keyframes sealBreak {
+/* =================================
+   SEAL BREAK
+================================= */
+
+@keyframes sealOpen {
 
     0% {
         transform:
             translate(-50%, -50%)
-            translateZ(60px)
+            translateZ(80px)
             scale(1)
-            rotate(0deg);
+            rotate(0);
 
         opacity: 1;
     }
@@ -662,8 +636,8 @@ body.revealed .invitation {
     45% {
         transform:
             translate(-50%, -50%)
-            translateZ(160px)
-            scale(1.15)
+            translateZ(150px)
+            scale(1.18)
             rotate(8deg);
 
         opacity: 1;
@@ -672,31 +646,34 @@ body.revealed .invitation {
     100% {
         transform:
             translate(-50%, -50%)
-            translateZ(280px)
-            scale(.15)
+            translateZ(250px)
+            scale(.1)
             rotate(25deg);
 
         opacity: 0;
     }
 }
 
-/* REAL FLAP */
 
-@keyframes realFlapOpen {
+/* =================================
+   FLAP REAL OPEN
+================================= */
+
+@keyframes flapOpen {
 
     0% {
         transform:
             rotateX(0deg);
     }
 
-    30% {
+    25% {
         transform:
-            rotateX(-45deg);
+            rotateX(-55deg);
     }
 
-    60% {
+    55% {
         transform:
-            rotateX(-115deg);
+            rotateX(-120deg);
     }
 
     100% {
@@ -705,7 +682,10 @@ body.revealed .invitation {
     }
 }
 
-/* LEFT */
+
+/* =================================
+   FOLDS
+================================= */
 
 @keyframes leftOpen {
 
@@ -719,14 +699,13 @@ body.revealed .invitation {
 
     100% {
         transform:
-            rotateY(25deg)
-            translateX(-40px);
+            rotateY(28deg)
+            translateX(-45px);
 
-        opacity: .45;
+        opacity: .35;
     }
 }
 
-/* RIGHT */
 
 @keyframes rightOpen {
 
@@ -740,14 +719,13 @@ body.revealed .invitation {
 
     100% {
         transform:
-            rotateY(-25deg)
-            translateX(40px);
+            rotateY(-28deg)
+            translateX(45px);
 
-        opacity: .45;
+        opacity: .35;
     }
 }
 
-/* BOTTOM */
 
 @keyframes bottomOpen {
 
@@ -764,47 +742,50 @@ body.revealed .invitation {
             rotateX(35deg)
             translateY(25px);
 
-        opacity: .45;
+        opacity: .3;
     }
 }
 
-/* LETTER */
 
-@keyframes letterComesOut {
+/* =================================
+   LETTER COMES OUT
+================================= */
+
+@keyframes letterOut {
 
     0% {
         opacity: 0;
 
         transform:
             translateY(42%)
-            translateZ(5px)
+            translateZ(10px)
             scale(.82);
     }
 
-    18% {
+    20% {
         opacity: 1;
 
         transform:
             translateY(15%)
-            translateZ(20px)
-            scale(.86);
+            translateZ(30px)
+            scale(.88);
     }
 
     45% {
         opacity: 1;
 
         transform:
-            translateY(-10%)
-            translateZ(50px)
-            scale(.92);
+            translateY(-15%)
+            translateZ(60px)
+            scale(.94);
     }
 
     70% {
         opacity: 1;
 
         transform:
-            translateY(-35%)
-            translateZ(80px)
+            translateY(-42%)
+            translateZ(100px)
             scale(1);
     }
 
@@ -812,11 +793,169 @@ body.revealed .invitation {
         opacity: 1;
 
         transform:
-            translateY(-65%)
-            translateZ(120px)
+            translateY(-70%)
+            translateZ(140px)
             scale(1.08);
     }
 }
+
+
+/* =================================
+   FINAL INVITATION
+================================= */
+
+.invitation {
+    position: fixed;
+
+    inset: 0;
+
+    z-index: 1;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    padding: 25px;
+
+    overflow-y: auto;
+
+    background:
+        radial-gradient(
+            circle,
+            #fffdf9,
+            #eee7db
+        );
+
+    opacity: 0;
+
+    transform: scale(.85);
+
+    pointer-events: none;
+
+    transition:
+        opacity 1.5s ease,
+        transform 1.5s ease;
+}
+
+
+.invitation-card {
+    width: min(90vw, 720px);
+
+    padding: 60px 25px;
+
+    text-align: center;
+
+    background: rgba(255,253,248,.8);
+
+    border: 1px solid rgba(160,125,65,.35);
+
+    box-shadow:
+        0 25px 70px rgba(50,38,25,.12);
+}
+
+
+.star {
+    color: #a7854b;
+
+    font-size: 20px;
+
+    margin-bottom: 18px;
+}
+
+
+.final-name {
+    margin: 18px 0;
+
+    font-family: "Great Vibes", cursive;
+
+    font-size: clamp(70px, 14vw, 110px);
+
+    line-height: .7;
+}
+
+
+.final-ampersand {
+    color: #9b7a3d;
+
+    font-size: 28px;
+}
+
+
+.details {
+    display: flex;
+
+    justify-content: center;
+
+    gap: 60px;
+
+    margin-top: 35px;
+
+    font-family: "Montserrat", sans-serif;
+}
+
+
+.details div {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 8px;
+}
+
+
+.details span {
+    font-size: 9px;
+
+    letter-spacing: .25em;
+
+    color: #927748;
+}
+
+
+.details strong {
+    font-size: 12px;
+
+    letter-spacing: .12em;
+
+    font-weight: 500;
+}
+
+
+.invitation-card p {
+    margin-top: 35px;
+
+    font-size: 19px;
+
+    font-style: italic;
+}
+
+
+/* =================================
+   REVEAL
+================================= */
+
+body.revealed .opening {
+    opacity: 0;
+
+    visibility: hidden;
+
+    pointer-events: none;
+}
+
+
+body.revealed .invitation {
+    opacity: 1;
+
+    transform: scale(1);
+
+    pointer-events: auto;
+}
+
+
+/* =================================
+   BREATH
+================================= */
 
 @keyframes breathe {
 
@@ -830,80 +969,82 @@ body.revealed .invitation {
     }
 }
 
-/* =========================
+
+/* =================================
    MOBILE
-========================= */
+================================= */
 
 @media (max-width: 600px) {
 
-    .envelope-wrapper {
-        width: 92vw;
+    .envelope-scene {
+        width: 94vw;
         height: 65vw;
 
         perspective: 1000px;
     }
 
+
     .envelope {
-        width: 88vw;
+        width: 90vw;
         height: 56vw;
     }
 
-    .left-fold {
-        border-left-width: 44vw;
+
+    .fold.left {
+        border-left-width: 45vw;
         border-top-width: 28vw;
         border-bottom-width: 28vw;
     }
 
-    .right-fold {
-        border-right-width: 44vw;
+
+    .fold.right {
+        border-right-width: 45vw;
         border-top-width: 28vw;
         border-bottom-width: 28vw;
     }
 
-    .bottom-fold {
-        border-left-width: 44vw;
-        border-right-width: 44vw;
-        border-bottom-width: 29vw;
+
+    .fold.bottom {
+        border-left-width: 45vw;
+        border-right-width: 45vw;
+        border-bottom-width: 30vw;
     }
+
 
     .seal {
         width: 76px;
         height: 76px;
-
-        font-size: 16px;
     }
 
-    .letter-inner {
-        padding: 10px;
+
+    .mini-title {
+        font-size: 6.5px;
     }
 
-    .letter h1 {
-        font-size: 38px;
+
+    .name {
+        font-size: 40px;
     }
 
-    .small-title {
-        font-size: 7px;
+
+    .quote {
+        font-size: 12px;
     }
 
-    .info {
+
+    .details {
         flex-direction: column;
-        gap: 6px;
+
+        gap: 20px;
     }
 
-    .letter p {
-        font-size: 13px;
-    }
-
-    .final-info {
-        flex-direction: column;
-        gap: 22px;
-    }
 
     .invitation-card {
-        padding: 55px 18px;
+        padding: 50px 18px;
     }
 
-    .invitation h2 {
+
+    .final-name {
         font-size: 70px;
     }
 }
