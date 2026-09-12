@@ -1217,3 +1217,41 @@ body.revealed .invitation {
         transition-duration: .01ms !important;
     }
 }
+/* =========================================
+   LACE PATTERN & EMBOSSING (فخامة الدانتيل)
+========================================= */
+
+/* نقشة الدانتيل على الجيب الأمامي */
+.envelope-body::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    background-image: 
+        radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.8) 2px, transparent 2.5px),
+        radial-gradient(circle at 0% 100%, rgba(184, 149, 82, 0.15) 1px, transparent 2px);
+    background-size: 12px 12px, 24px 24px;
+    opacity: 0.65;
+    pointer-events: none;
+}
+
+/* نقشة الدانتيل المفرغ للغطاء العلوي (Flap Lace) */
+.flap::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 3;
+    background: 
+        radial-gradient(circle at 50% 100%, transparent 60%, rgba(184, 149, 82, 0.2) 62%, transparent 65%),
+        repeating-linear-gradient(45deg, rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.7) 4px, transparent 4px, transparent 8px);
+    opacity: 0.8;
+    pointer-events: none;
+}
+
+/* إطار ذهبي بارز على أطراف الغطاء */
+.flap-inner {
+    position: absolute;
+    inset: 0;
+    border-bottom: 2px solid var(--gold-light);
+    filter: drop-shadow(0 2px 3px rgba(141, 109, 50, 0.3));
+}
