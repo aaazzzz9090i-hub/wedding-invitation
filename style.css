@@ -958,3 +958,9 @@ body {
         font-size: 18px;
     }
 }
+.envelope-area,
+.envelope,
+.seal {
+    cursor: pointer;
+    pointer-events: auto;
+}
