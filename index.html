@@ -1,1 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ahmed Mansour | Full-Stack Developer</title>
+    <!-- Google Fonts & FontAwesome Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --bg-color: #0f172a;
+            --card-bg: #1e293b;
+            --primary: #38bdf8;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --border: #334155;
+        }
 
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Inter', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.6;
+            padding: 2rem 1rem;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        /* Header / Hero Section */
+        header {
+            text-align: center;
+            padding: 3rem 1.5rem;
+            background: var(--card-bg);
+            border-radius: 16px;
+            border: 1px solid var(--border);
+            margin-bottom: 2rem;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3);
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        header p.subtitle {
+            font-size: 1.2rem;
+            color: var(--text-muted);
+            margin-bottom: 1.5rem;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.2rem;
+            flex-wrap: wrap;
+        }
+
+        .social-links a {
+            color: var(--text-main);
+            text-decoration: none;
+            background: #0f172a;
+            padding: 0.6rem 1.2rem;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .social-links a:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+            transform: translateY(-2px);
+        }
+
+        /* Section Styling */
+        section {
+            background: var(--card-bg);
+            border-radius: 16px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            border: 1px solid var(--border);
+        }
+
+        section h2 {
+            font-size: 1.5rem;
+            color: var(--primary);
+            margin-bottom: 1.2rem;
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            border-bottom: 2px solid var(--border);
+            padding-bottom: 0.5rem;
+        }
+
+        /* Skills Badges */
+        .skills-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+        }
+
+        .skill-tag {
+            background: #0f172a;
+            color: var(--text-main);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            border: 1px solid var(--border);
+            font-size: 0.9rem;
+        }
+
+        .skill-tag i {
+            color: var(--primary);
+            margin-right: 0.4rem;
+        }
+
+        /* Cards Grid for Education & Experience */
+        .card-list {
+            display: grid;
+            gap: 1.5rem;
+        }
+
+        .card-item {
+            background: #0f172a;
+            padding: 1.2rem;
+            border-radius: 10px;
+            border-left: 4px solid var(--primary);
+        }
+
+        .card-item h3 {
+            font-size: 1.1rem;
+            color: var(--text-main);
+        }
+
+        .card-item .meta {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-bottom: 0.5rem;
+        }
+
+        /* Projects Section Placeholder */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+        }
+
+        .project-card {
+            background: #0f172a;
+            border-radius: 10px;
+            padding: 1.2rem;
+            border: 1px solid var(--border);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .project-card h3 {
+            color: var(--text-main);
+            margin-bottom: 0.5rem;
+        }
+
+        .project-card p {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        footer {
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            padding-top: 1rem;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+
+    <!-- HERO HEADER -->
+    <header>
+        <h1>Ahmed Mansour</h1>
+        <p class="subtitle">Full-Stack Developer | C# & ASP.NET Core Specialist</p>
+        <div class="social-links">
+            <a href="mailto:aaazzzz9090i@gmail.com"><i class="fas fa-envelope"></i> Email</a>
+            <a href="https://www.linkedin.com/in/ahmed-mansour-87a615360" target="_blank"><i class="fab fa-linkedin"></i> LinkedIn</a>
+            <a href="https://github.com/aaazzzz9090i-hub/wedding-invitation" target="_blank"><i class="fab fa-github"></i> GitHub</a>
+        </div>
+    </header>
+
+    <!-- ABOUT ME -->
+    <section>
+        <h2><i class="fas fa-user-code"></i> About Me</h2>
+        <p>
+            Full-Stack Developer with 1 year of practical experience in designing and building scalable, user-centric web applications. Currently an IT student at the Faculty of Computers and Information (EELU), passionate about end-to-end web development, clean architecture, database design, and delivering high-performance digital solutions.
+        </p>
+    </section>
+
+    <!-- SKILLS -->
+    <section>
+        <h2><i class="fas fa-layer-group"></i> Technical Skills</h2>
+        <div class="skills-grid">
+            <span class="skill-tag"><i class="fas fa-code"></i> C#</span>
+            <span class="skill-tag"><i class="fas fa-server"></i> ASP.NET Core (Web API & MVC)</span>
+            <span class="skill-tag"><i class="fas fa-database"></i> Entity Framework Core</span>
+            <span class="skill-tag"><i class="fas fa-database"></i> SQL Server / T-SQL</span>
+            <span class="skill-tag"><i class="fab fa-html5"></i> HTML5 & CSS3</span>
+            <span class="skill-tag"><i class="fab fa-js"></i> JavaScript</span>
+            <span class="skill-tag"><i class="fab fa-bootstrap"></i> Bootstrap / Tailwind CSS</span>
+            <span class="skill-tag"><i class="fab fa-git-alt"></i> Git & GitHub</span>
+            <span class="skill-tag"><i class="fas fa-network-wired"></i> RESTful APIs & Postman</span>
+            <span class="skill-tag"><i class="fas fa-sitemap"></i> OOP & Clean Architecture</span>
+            <span class="skill-tag"><i class="fas fa-network-wired"></i> Cisco Networking Fundamentals</span>
+        </div>
+    </section>
+
+    <!-- EDUCATION & CERTIFICATIONS -->
+    <section>
+        <h2><i class="fas fa-graduation-cap"></i> Education & Certifications</h2>
+        <div class="card-list">
+            <div class="card-item">
+                <h3>Faculty of Computers and Information — IT Department</h3>
+                <div class="meta">Egyptian E-Learning University (EELU) | Expected Graduation: 2028</div>
+                <p>Specializing in Information Technology, Software Engineering, and Database Systems.</p>
+            </div>
+            <div class="card-item">
+                <h3>Ruwwad Digital Egypt Initiative (DEPI)</h3>
+                <div class="meta">Full-Stack Web Development Track</div>
+                <p>Focused on C#, ASP.NET Core, Database Design, and Enterprise Application Development.</p>
+            </div>
+            <div class="card-item">
+                <h3>Cisco Certified Certificate</h3>
+                <div class="meta">Cisco Networking Academy</div>
+                <p>Networking Fundamentals, Switch & Router Configuration using Cisco Packet Tracer.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- PROJECTS -->
+    <section>
+        <h2><i class="fas fa-project-diagram"></i> Featured Projects</h2>
+        <div class="projects-grid">
+            <div class="project-card">
+                <div>
+                    <h3>Wedding Invitation App</h3>
+                    <p>An interactive dynamic web application designed for digital wedding management and RSVP management.</p>
+                </div>
+                <a href="https://github.com/aaazzzz9090i-hub/wedding-invitation" target="_blank" class="social-links" style="display:inline-block; margin-top:1rem;">
+                    <i class="fab fa-github"></i> View Code
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <p>© 2026 Ahmed Mansour. Built with passion and clean code.</p>
+    </footer>
+
+</div>
+
+</body>
+</html>
