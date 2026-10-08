@@ -1127,6 +1127,47 @@
   font-size: 0.9rem;
   color: #e0e0e0;
 }
+        .skills-grid-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+  padding: 3rem 1rem;
+  
+  /* تأثير الظهور والاختفاء مع السكرول */
+  animation: scrollReveal linear auto;
+  animation-timeline: view();
+  animation-range: entry 10% cover 30%;
+}
+
+@keyframes scrollReveal {
+  from {
+    opacity: 0;
+    transform: translateY(40px) scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.skill-badge {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 10px 20px;
+  border-radius: 20px;
+  font-size: 0.95rem;
+  color: #e0e0e0;
+  backdrop-filter: blur(5px);
+  transition: transform 0.3s ease, border-color 0.3s ease;
+}
+
+/* تأثير تحريك خفيف عند الوقوف بالماوس */
+.skill-badge:hover {
+  transform: translateY(-5px);
+  border-color: #007acc;
+  background: rgba(0, 122, 204, 0.15);
+}
     </style>
 </head>
 
